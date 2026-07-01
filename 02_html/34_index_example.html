@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>김코딩 소개</title>
+</head>
+<body>
+
+  <header class="site-header">                <!-- class=스타일용 이름표 (CSS에서 .site-header 로 꾸밈) -->
+    <h1>김코딩</h1>
+    <nav>
+      <a href="#about" class="nav-link">소개</a> ·          <!-- 같은 class="nav-link" 3개 → CSS 한 번에 똑같이 꾸밈 (class는 공유 OK) -->
+      <a href="#skill" class="nav-link">할 줄 아는 것</a> ·
+      <a href="#contact" class="nav-link">연락처</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section" id="about">        <!-- class="section"=공유 스타일 / id="about"=점프용 고유 이름 (한 태그에 둘 다 가능) -->
+      <h2>소개</h2>
+      <p>안녕하세요, <strong>HTML을 막 배운</strong> 김코딩입니다.</p>
+      <img src="https://placehold.co/200x200" alt="내 프로필 사진" width="200" class="profile-img">
+    </section>
+
+    <section class="section" id="skill">
+      <h2>할 줄 아는 것</h2>
+      <ul>
+        <li>HTML 뼈대 만들기</li>
+        <li>시맨틱 태그로 구조 짜기</li>
+        <li>표·폼·링크 넣기</li>
+      </ul>
+
+      <h3>공부 기록</h3>
+      <table>
+        <thead><tr><th>주차</th><th>배운 것</th></tr></thead>
+        <tbody>
+          <tr><td>1주</td><td>태그·뼈대</td></tr>
+          <tr><td>2주</td><td>표·폼·시맨틱</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section" id="contact">
+      <h2>연락처</h2>
+      <form action="/send" method="post">
+        <label for="name">이름</label>
+        <input type="text" id="name" name="name" required>       <!-- id="name"=label의 for와 짝(고유) / name="name"=서버로 보낼 값 이름 -->
+
+        <label for="msg">하고 싶은 말</label>
+        <textarea id="msg" name="msg" rows="3"></textarea>
+
+        <button type="submit" class="btn">보내기</button>       <!-- class="btn"=버튼 공통 스타일 (여러 버튼에 재사용) -->
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <small>&copy; 2026 김코딩</small>
+  </footer>
+
+</body>
+</html>
