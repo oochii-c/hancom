@@ -1,0 +1,9 @@
+body {background-color: rgb(160, 160, 187); font-family: Verdana, Geneva, Tahoma, sans-serif;}
+
+/*요소 선택자*/
+h3 {color: aquamarine; text-align: center;}
+p {color: darkslategray;}
+
+/*클래스 선택*/
+.special {color: darkmagenta; font-weight: 100; font-width: 30;}
+li em {color: lightsalmon;}
