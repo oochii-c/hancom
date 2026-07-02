@@ -1,0 +1,24 @@
+ul {
+    background-color: #f9f9f9;
+    padding: 50px;                  /*내부 여백 글짜와 테두리 사이 공간*/
+    border: 5px solid navy;      /*테두리 두께, 선 종류, 색상*/
+    margin: 20px;                    /*외부 여백 옆 요소와의 공간*/
+    list-style: none;        /*리스트 스타일 제거*/
+    height: 200px;
+    width: 200px;
+}
+
+
+/*
+값 2개 상하 좌우
+margin: 10px 30px 상하 10 좌우 30
+값 4개 상 우 하 좌
+margin 10px 20px 30px 50px
+
+or
+
+margin-top: 10px;
+margin-right: 20px;
+margin-bottom: 30px;
+margin-left: 50px;
+*/

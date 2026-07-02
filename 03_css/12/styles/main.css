@@ -1,0 +1,71 @@
+/*페이지를 일부러 길게 만들어서 스크롤 생성 => fixed, sticky 동작 확인용*/
+body {
+    min-height: 1500px;
+}
+
+/*부모 박스 : position : relative*/
+.parent {
+    width: 400px;
+    height: 120px;
+    border: 1px dashed red;
+    position: relative; /*기준이 되는 부모*/
+    border-radius: 8px;
+    background-color: #d48080;
+    margin: 10px 0;
+}
+
+/* relative: 원래 자리 기준으로 이동*/
+
+.ptag {
+    position: absolute; /*부모 박스 기준으로 위치 지정*/
+    top: 6px;
+    left: 10px;
+    color: purple;
+    font-weight: bold;
+}
+
+.rel {
+    position: relative; /*원래 자리 기준으로 이동*/
+    top: 30px;
+    left: 20px;
+    width: 150px;
+    padding: 8px;
+    background-color: #d4d480;
+    border-radius: 8px;
+    font-weight: bold; 
+    color: aqua;
+}
+
+.abs {
+    position: absolute; /*부모 박스 기준으로 위치 지정*/
+    bottom: 5%;
+    right: 16px;
+    padding: 10px;
+    background-color: pink;
+    color: rgb(105, 20, 20);
+    z-index: 10; /*겹칠 때 우선순위*/
+    border-radius: 6px;
+}
+
+.fixed {
+    position: fixed;
+    background-color: blueviolet;
+    color: azure;
+    font-weight: bold;
+    border-radius: 6px;
+    bottom: 16px;
+    right: 16px;
+    padding: 10px;
+}
+
+/* sticky: 스크롤하다 top: -지점에 닿으면 상단에 착 붙음*/
+.sticky {
+    position: sticky;
+    top: 10px ; /*상단에 붙는 지점*/
+    margin: 10px 0;
+    background-color: #80d480;
+    color: #000;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 8px 12px;
+}

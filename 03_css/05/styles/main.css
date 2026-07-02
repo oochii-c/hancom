@@ -1,0 +1,19 @@
+.menu{
+    display: flex;
+    gap: 10px;
+    list-style: none;
+}
+
+.menu li:nth-child(3){
+    color: red;
+    font-weight: bold;
+    background-color: yellow;
+    border: 2px solid darkblue;
+}
+
+.menu li:nth-child(2){
+    color: green;
+    font-weight: bold;
+    background-color: lightblue;
+    border: 2px solid darkgreen;
+}

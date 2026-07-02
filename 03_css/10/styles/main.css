@@ -1,0 +1,15 @@
+@keyframes move {
+    0%, 100%{transform: translateY(0);}
+    0%, 100%{transform: translateX(0);}    
+    180%{transform: translateX(-100px);} /*시작(0)|끝(100)을 제자리로 설정*/
+    50%{transform: translateY(-100px);} /*중간(50)을 위로 30px 이동*/
+}
+
+.dancingmarimo {
+    border: 1px solid aquamarine;
+    width: 100px;
+    height: 100px;
+    background-color: green;
+    border-radius: 50%;
+    animation: move 10s infinite; /*애니메이션 이름, 시간, 반복횟수*/
+}
