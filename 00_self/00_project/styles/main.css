@@ -1,0 +1,232 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #d9d9d9;
+  font-family: system-ui, "Malgun Gothic", sans-serif;
+  padding: 40px;
+}
+
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ---------- 1. showcase ---------- */
+.showcase {
+  display: flex;
+  gap: 8px;
+}
+
+/* 라디오는 화면에서 숨기고 label(탭 숫자)로만 조작 */
+.shot-radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.showcase-viewer {
+  position: relative;
+  flex: 3;
+  aspect-ratio: 16 / 6;
+  background: #2b2b2b;
+  color: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* 체크된 라디오에 대응하는 slide만 노출 */
+#shot-1:checked ~ .showcase-viewer .slide-1,
+#shot-2:checked ~ .showcase-viewer .slide-2,
+#shot-3:checked ~ .showcase-viewer .slide-3,
+#shot-4:checked ~ .showcase-viewer .slide-4,
+#shot-5:checked ~ .showcase-viewer .slide-5 {
+  opacity: 1;
+}
+
+.showcase-tabs {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 2;
+}
+
+.showcase-tabs label {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+#shot-1:checked ~ .showcase-viewer .showcase-tabs label[for="shot-1"],
+#shot-2:checked ~ .showcase-viewer .showcase-tabs label[for="shot-2"],
+#shot-3:checked ~ .showcase-viewer .showcase-tabs label[for="shot-3"],
+#shot-4:checked ~ .showcase-viewer .showcase-tabs label[for="shot-4"],
+#shot-5:checked ~ .showcase-viewer .showcase-tabs label[for="shot-5"] {
+  background: #f4d10a;
+  color: #000;
+}
+
+.showcase-desc {
+  position: relative;
+  flex: 1;
+  background: #9a9aab;
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.desc {
+  position: absolute;
+  inset: 16px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+#shot-1:checked ~ .showcase-desc .desc-1,
+#shot-2:checked ~ .showcase-desc .desc-2,
+#shot-3:checked ~ .showcase-desc .desc-3,
+#shot-4:checked ~ .showcase-desc .desc-4,
+#shot-5:checked ~ .showcase-desc .desc-5 {
+  opacity: 1;
+}
+
+/* ---------- 2. about row ---------- */
+.about-row {
+  display: flex;
+  gap: 8px;
+}
+
+.box {
+  background: #7c7c96;
+  color: #fff;
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.category-box,
+.code-box {
+  flex: 1;
+}
+
+.intro-box {
+  flex: 2;
+  background: #fff;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.category-box ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.category-box li {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 6px 8px;
+  font-size: 0.85rem;
+}
+
+.code-box pre {
+  font-size: 0.8rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ---------- 3. quiz ---------- */
+.quiz-title {
+  background: #f5e3df;
+  padding: 10px 16px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.quiz-cards {
+  display: flex;
+  gap: 8px;
+}
+
+.quiz-card {
+  flex: 1;
+  aspect-ratio: 1;
+  perspective: 600px;
+  cursor: pointer;
+}
+
+.quiz-check {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease;
+}
+
+.quiz-check:checked ~ .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px;
+  border-radius: 4px;
+  backface-visibility: hidden;
+  font-size: 0.85rem;
+}
+
+.card-face.front {
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+.card-face.back {
+  background: #fff;
+  border: 1px solid #ccc;
+  transform: rotateY(180deg);
+  font-size: 1.6rem;
+}
