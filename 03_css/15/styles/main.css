@@ -1,0 +1,21 @@
+/*:root - 문서전체의 뿌리 >> 어디서든 꺼내 쓸수있다(안에 변수 정리)*/
+:root {
+    --main-color: rgb(14, 38, 104); /*메인 색상 지정, 이걸로 전체 색상 조정 가능*/
+    --gap: 12px;
+}
+
+.row {
+    display: flex;
+    gap: var(--gap);
+}
+.btn {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 8px;
+    background: var(--main-color);
+    color: #ffffff;
+    font-weight: bold;
+    cursor: move;
+    width: 100px;
+    height: 50px;
+}
