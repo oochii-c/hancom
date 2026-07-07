@@ -1,0 +1,5 @@
+/* 결과 문장(id="out")을 크고 굵게 */
+#out { font-size: 18px; font-weight: 700; margin-top: 12px; }
+
+/* 버튼에 안쪽 여백 */
+button { padding: 8px 12px; font-size: 14px; }

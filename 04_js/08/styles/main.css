@@ -1,0 +1,16 @@
+/*html 버튼 값에 해당하는 css 설정 부여
+패딩 12x24로 버튼 사이즈 부여
+마우스 커서는 포인터 형태로 반응*/
+button {
+    padding: 10px 30px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/*id: txtresult에 폰트 설정 부여
+24pt 볼드처리, 상단 마진은 12px*/
+#txtresult {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 12px;
+}

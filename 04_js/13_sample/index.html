@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!--문서양식=HTML, 사용언어=한국어-->
+<html lang="ko">
+<head>
+    <!--문자 유실 방지를 위한 유니코드 설정-->
+    <meta charset="utf-8">
+    <!--탭 상단 제목-->
+    <title>목록 추가</title>
+    <!--스타일시트 경로-->
+    <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+    <!--전체를 감싸는 박스-->
+    <div class="box">
+        <!--입력창 + 추가 버튼 한 줄-->
+        <div class="row">
+            <!--입력창: id=name, 안내문구는 placeholder-->
+            <input type="text" id="name" placeholder="파일 이름">
+            <!--추가 버튼: id=add-->
+            <button id="add">추가</button>
+        </div>
+        <!--누적된 목록이 보여질 곳: id=list-->
+        <p id="list"></p>
+        <!--개수가 보여질 곳: id=count-->
+        <p id="count">개수(length): 0</p>
+    </div>
+    <!--자바스크립트 경로-->
+    <script src="./scripts/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+/* 기본 스타일 */
+body { font-family: sans-serif; padding: 24px; color: #24292f; }
+
+/* 안내 문구 */
+.note { color: #666; font-size: 13px; }
+
+/* 버튼 줄 간격 */
+.btn-row { display: flex; gap: 8px; margin: 12px 0; }
+button { padding: 8px 14px; font-size: 14px; cursor: pointer; }
+
+/* 결과창(id="out") — 콘솔처럼 보이게 */
+#out { background: #0d1117; color: #e6edf3; padding: 12px; border-radius: 6px; min-height: 60px; white-space: pre-wrap; }
