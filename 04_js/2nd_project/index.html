@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">                                  <!-- 문자 인코딩: 한글이 깨지지 않게 UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">  <!-- 모바일에서 실제 폭에 맞춰 표시 -->
+  <title>Dotscaper — 도트 그래픽 변환기</title>              <!-- 브라우저 탭에 뜨는 제목 -->
+  <link rel="stylesheet" href="styles/style.css">          <!-- 스타일(디자인)은 별도 CSS 파일에서 -->
+</head>
+<body>
+
+<!-- ===== 헤더: 로고 + 한 줄 소개 ===== -->
+<header class="app">
+  <div class="logo"><b>Dot</b>scaper</div>
+  <div class="tagline">도트 그래픽 변환기 — 슬라이더 하나로 사진을 레트로 도트 그림으로.</div>
+</header>
+
+<!-- ===== 본문: 왼쪽 미리보기 + 오른쪽 컨트롤 패널(2단 그리드) ===== -->
+<main>
+  <!-- 미리보기 영역(=드롭존). 여기에 사진을 끌어다 놓을 수 있다. -->
+  <section class="stage" id="stage" aria-label="미리보기 캔버스 (사진을 끌어다 놓으세요)">
+    <!-- .frame = 실제로 보이는 박스(테두리·체커보드). 이미지 크기에 맞춰 줄어든다. -->
+    <div class="frame" id="frame">
+      <!-- 결과 도트 이미지를 그리는 메인 캔버스. width/height는 '내부 해상도'로 JS가 다시 설정한다. -->
+      <canvas id="preview" width="640" height="420" role="img" aria-label="도트 변환 미리보기"></canvas>
+      <div class="dropHint">📷 사진을 끌어다 놓으세요 · <span>🔒 로컬 처리</span></div>  <!-- 좌하단 안내 문구 -->
+      <div class="dropBig">여기에 놓기</div>                 <!-- 드래그 중에만 보이는 큰 안내(평소 숨김) -->
+      <canvas id="crt" class="crt" aria-hidden="true"></canvas>  <!-- 업로드 시 정전기(CRT) 연출용 오버레이 -->
+    </div>
+  </section>
+
+  <!-- 오른쪽 컨트롤 패널 -->
+  <aside class="panel">
+    <!-- 카드 1: 강도 슬라이더 + 현재 수치 표시 -->
+    <div class="card">
+      <div class="label-row">
+        <span class="k">강도</span>
+        <span class="v"><span id="pct">51</span>%</span>       <!-- 현재 강도(%). JS가 실시간 갱신 -->
+      </div>
+      <!-- 강도 슬라이더(0~100). value/aria 값은 로드 시 JS가 기본값으로 덮어쓴다. -->
+      <input id="strength" type="range" min="0" max="100" value="51" autocomplete="off"
+             aria-label="도트 강도" aria-valuetext="51 퍼센트">
+      <div class="ticks"><span>0</span><span>30</span><span>60</span><span>100</span></div>  <!-- 눈금 라벨 -->
+      <div class="readout">격자 <b id="rGrid">279</b>px · 색 <b id="rColors">20</b>개</div>  <!-- 격자/색 수치(JS 갱신) -->
+    </div>
+
+    <!-- 카드 2: 버튼들 + 숨겨진 파일 입력창 -->
+    <div class="card btns">
+      <button id="openBtn" class="primary">사진 열기</button>   <!-- 클릭 시 아래 숨은 파일창을 대신 연다 -->
+      <button id="exportBtn">PNG 내보내기</button>              <!-- 원본 해상도로 변환해 다운로드 -->
+      <input id="file" type="file" accept="image/*" hidden>    <!-- 실제 파일 선택창(화면엔 숨김) -->
+    </div>
+
+    <!-- 카드 3: 프라이버시 안내(모든 처리가 브라우저 안에서만 일어남) -->
+    <div class="card privacy">
+      <div class="h">🔒 로컬 처리</div>
+      모든 변환은 이 브라우저 안에서만 처리됩니다. 사진은 서버로 전송되지 않으며,
+      내보낸 이미지에서는 위치정보·촬영정보(EXIF)가 자동 제거됩니다.
+    </div>
+  </aside>
+</main>
+
+<!-- 초기 샘플 이미지(base64 data URI). app.js보다 먼저 로드해 window.INIT_IMAGE 를 준비시킨다. -->
+<script src="scripts/img-init.js"></script>
+<!-- 로직(JS)은 별도 파일. body 맨 끝에 두어 위 요소들이 모두 준비된 뒤 실행되게 한다. -->
+<script src="scripts/app.js"></script>
+</body>
+</html>
