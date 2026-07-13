@@ -1,0 +1,159 @@
+{
+  "scriptCompleted": true,
+  "directoryGroups": {
+    "root": [
+      "document:README.md",
+      "file:index.html",
+      "config:package.json",
+      "file:eslint.config.js",
+      "file:vite.config.js"
+    ],
+    ".understand-anything": [
+      "file:.understand-anything/.understandignore",
+      "config:.understand-anything/config.json"
+    ],
+    "src": [
+      "file:src/App.css",
+      "file:src/App.jsx",
+      "file:src/index.css",
+      "file:src/main.jsx"
+    ]
+  },
+  "nodeTypeGroups": {
+    "document": [
+      "document:README.md"
+    ],
+    "file": [
+      "file:index.html",
+      "file:.understand-anything/.understandignore",
+      "file:eslint.config.js",
+      "file:src/App.css",
+      "file:src/App.jsx",
+      "file:src/index.css",
+      "file:src/main.jsx",
+      "file:vite.config.js"
+    ],
+    "config": [
+      "config:package.json",
+      "config:.understand-anything/config.json"
+    ]
+  },
+  "crossCategoryEdges": [
+    {
+      "fromType": "document",
+      "toType": "file",
+      "edgeType": "documents",
+      "count": 1
+    },
+    {
+      "fromType": "file",
+      "toType": "file",
+      "edgeType": "depends_on",
+      "count": 2
+    },
+    {
+      "fromType": "config",
+      "toType": "file",
+      "edgeType": "configures",
+      "count": 3
+    },
+    {
+      "fromType": "file",
+      "toType": "file",
+      "edgeType": "imports",
+      "count": 3
+    },
+    {
+      "fromType": "file",
+      "toType": "file",
+      "edgeType": "configures",
+      "count": 3
+    }
+  ],
+  "interGroupImports": [],
+  "intraGroupDensity": {
+    "root": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    ".understand-anything": {
+      "internalEdges": 0,
+      "totalEdges": 0,
+      "density": 0
+    },
+    "src": {
+      "internalEdges": 3,
+      "totalEdges": 3,
+      "density": 1
+    }
+  },
+  "patternMatches": {
+    "root": "entry",
+    ".understand-anything": "unknown",
+    "src": "service"
+  },
+  "deploymentTopology": {
+    "hasDockerfile": false,
+    "hasCompose": false,
+    "hasK8s": false,
+    "hasTerraform": false,
+    "hasCI": false,
+    "infraFiles": []
+  },
+  "dataPipeline": {
+    "schemaFiles": [],
+    "migrationFiles": [],
+    "dataModelFiles": [],
+    "apiHandlerFiles": []
+  },
+  "docCoverage": {
+    "groupsWithDocs": 1,
+    "totalGroups": 3,
+    "coverageRatio": 0.3333333333333333,
+    "undocumentedGroups": [
+      ".understand-anything",
+      "src"
+    ]
+  },
+  "dependencyDirection": [],
+  "fileStats": {
+    "totalFileNodes": 11,
+    "filesPerGroup": {
+      "root": 5,
+      ".understand-anything": 2,
+      "src": 4
+    },
+    "nodeTypeCounts": {
+      "document": 1,
+      "file": 8,
+      "config": 2
+    }
+  },
+  "fileFanIn": {
+    "document:README.md": 0,
+    "file:index.html": 0,
+    "config:package.json": 0,
+    "file:.understand-anything/.understandignore": 0,
+    "config:.understand-anything/config.json": 0,
+    "file:eslint.config.js": 0,
+    "file:src/App.css": 1,
+    "file:src/App.jsx": 1,
+    "file:src/index.css": 1,
+    "file:src/main.jsx": 0,
+    "file:vite.config.js": 0
+  },
+  "fileFanOut": {
+    "document:README.md": 0,
+    "file:index.html": 0,
+    "config:package.json": 0,
+    "file:.understand-anything/.understandignore": 0,
+    "config:.understand-anything/config.json": 0,
+    "file:eslint.config.js": 0,
+    "file:src/App.css": 0,
+    "file:src/App.jsx": 1,
+    "file:src/index.css": 0,
+    "file:src/main.jsx": 2,
+    "file:vite.config.js": 0
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "scriptCompleted": true,
+  "stats": {
+    "filesScanned": 11,
+    "filesWithImports": 2,
+    "totalEdges": 3
+  },
+  "importMap": {
+    ".understand-anything/.understandignore": [],
+    ".understand-anything/config.json": [],
+    "eslint.config.js": [],
+    "index.html": [],
+    "package.json": [],
+    "README.md": [],
+    "src/App.css": [],
+    "src/App.jsx": [
+      "src/App.css"
+    ],
+    "src/index.css": [],
+    "src/main.jsx": [
+      "src/App.jsx",
+      "src/index.css"
+    ],
+    "vite.config.js": []
+  }
+}

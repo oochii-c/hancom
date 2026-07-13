@@ -1,0 +1,9 @@
+#pic {
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#hint {
+    color: darkcyan;
+    margin-top: 10px;
+}

@@ -1,0 +1,192 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "my-app",
+    "languages": ["javascript", "css", "html", "markdown", "json"],
+    "frameworks": ["React", "Vite"],
+    "description": "React 19와 Vite 8 기반의 프론트엔드 스타터 랜딩 페이지 앱. HMR을 지원하며 히어로 로고 섹션, useState 카운터 버튼, 문서/소셜 외부 링크 섹션으로 구성된다.",
+    "analyzedAt": "2026-07-09T02:44:31Z",
+    "gitCommitHash": "476c13a5d0357b1b7138bf41540dd639474f621d"
+  },
+  "nodes": [
+    {
+      "id": "file:index.html",
+      "type": "file",
+      "name": "index.html",
+      "filePath": "index.html",
+      "language": "html",
+      "complexity": "simple",
+      "summary": "앱의 HTML 진입 문서. #root 컨테이너를 정의하고 /src/main.jsx 모듈 스크립트를 로드하여 React 앱을 부팅한다.",
+      "tags": ["html", "진입점", "마크업"]
+    },
+    {
+      "id": "file:src/main.jsx",
+      "type": "file",
+      "name": "main.jsx",
+      "filePath": "src/main.jsx",
+      "language": "javascript",
+      "complexity": "simple",
+      "summary": "React 진입점. createRoot로 #root 엘리먼트에 App 컴포넌트를 StrictMode로 마운트하고 전역 스타일(index.css)을 불러온다.",
+      "tags": ["react", "진입점", "부트스트랩"]
+    },
+    {
+      "id": "file:src/App.jsx",
+      "type": "file",
+      "name": "App.jsx",
+      "filePath": "src/App.jsx",
+      "language": "javascript",
+      "complexity": "moderate",
+      "summary": "메인 App 컴포넌트 파일. useState로 클릭 카운트를 관리하고 히어로 로고, 카운터 버튼, 문서/소셜 링크 섹션으로 이루어진 랜딩 페이지 UI를 렌더링한다.",
+      "tags": ["react", "컴포넌트", "ui", "useState"]
+    },
+    {
+      "id": "function:src/App.jsx:App",
+      "type": "function",
+      "name": "App",
+      "filePath": "src/App.jsx",
+      "language": "javascript",
+      "complexity": "simple",
+      "summary": "useState 훅으로 클릭 카운트를 관리하는 함수형 컴포넌트. 랜딩 페이지의 전체 JSX 트리를 반환한다.",
+      "tags": ["react", "함수형-컴포넌트", "hook"]
+    },
+    {
+      "id": "file:src/App.css",
+      "type": "file",
+      "name": "App.css",
+      "filePath": "src/App.css",
+      "language": "css",
+      "complexity": "simple",
+      "summary": "App 컴포넌트 전용 스타일. 히어로 레이아웃, 카운터 버튼, 링크 섹션 등 컴포넌트 UI의 세부 스타일을 정의한다.",
+      "tags": ["css", "스타일", "컴포넌트-스타일"]
+    },
+    {
+      "id": "file:src/index.css",
+      "type": "file",
+      "name": "index.css",
+      "filePath": "src/index.css",
+      "language": "css",
+      "complexity": "simple",
+      "summary": "전역 기본 스타일. 색상, 타이포그래피, 리셋 등 문서 전반에 적용되는 기본값을 설정한다.",
+      "tags": ["css", "전역-스타일"]
+    },
+    {
+      "id": "config:vite.config.js",
+      "type": "config",
+      "name": "vite.config.js",
+      "filePath": "vite.config.js",
+      "language": "javascript",
+      "complexity": "simple",
+      "summary": "Vite 빌드 및 개발 서버 설정. @vitejs/plugin-react 플러그인을 등록해 React 지원과 HMR을 활성화한다.",
+      "tags": ["vite", "빌드-설정", "config"]
+    },
+    {
+      "id": "config:eslint.config.js",
+      "type": "config",
+      "name": "eslint.config.js",
+      "filePath": "eslint.config.js",
+      "language": "javascript",
+      "complexity": "simple",
+      "summary": "ESLint 플랫 설정. JS 권장 규칙과 react-hooks, react-refresh 플러그인을 적용하고 dist 폴더를 무시한다.",
+      "tags": ["eslint", "린트", "config"]
+    },
+    {
+      "id": "config:package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "package.json",
+      "language": "json",
+      "complexity": "simple",
+      "summary": "프로젝트 매니페스트. React 19/Vite 8 의존성과 dev·build·lint·preview npm 스크립트를 정의한다.",
+      "tags": ["npm", "매니페스트", "의존성"]
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "name": "README.md",
+      "filePath": "README.md",
+      "language": "markdown",
+      "complexity": "simple",
+      "summary": "React + Vite 템플릿 안내 문서. 사용 가능한 공식 플러그인과 ESLint 설정 확장 방법을 설명한다.",
+      "tags": ["문서", "readme", "가이드"]
+    }
+  ],
+  "edges": [
+    { "source": "file:index.html", "target": "file:src/main.jsx", "type": "imports", "weight": 0.7 },
+    { "source": "file:src/main.jsx", "target": "file:src/App.jsx", "type": "imports", "weight": 0.7 },
+    { "source": "file:src/main.jsx", "target": "file:src/index.css", "type": "imports", "weight": 0.7 },
+    { "source": "file:src/App.jsx", "target": "file:src/App.css", "type": "imports", "weight": 0.7 },
+    { "source": "file:src/App.jsx", "target": "function:src/App.jsx:App", "type": "contains", "weight": 1.0 },
+    { "source": "config:vite.config.js", "target": "file:index.html", "type": "configures", "weight": 0.6 },
+    { "source": "config:eslint.config.js", "target": "file:src/App.jsx", "type": "configures", "weight": 0.6 },
+    { "source": "config:eslint.config.js", "target": "file:src/main.jsx", "type": "configures", "weight": 0.6 },
+    { "source": "document:README.md", "target": "config:package.json", "type": "documents", "weight": 0.5 },
+    { "source": "config:package.json", "target": "config:vite.config.js", "type": "related", "weight": 0.5 }
+  ],
+  "layers": [
+    {
+      "id": "layer:entry-bootstrap",
+      "name": "진입점 & 부트스트랩",
+      "description": "앱이 브라우저에서 부팅되는 시작점. HTML 호스트 문서와 React 마운트 코드가 위치한다.",
+      "nodeIds": ["file:index.html", "file:src/main.jsx"]
+    },
+    {
+      "id": "layer:ui-components",
+      "name": "UI 컴포넌트",
+      "description": "화면을 구성하는 React 컴포넌트 계층. 상태 관리와 JSX 렌더링을 담당한다.",
+      "nodeIds": ["file:src/App.jsx"]
+    },
+    {
+      "id": "layer:styling",
+      "name": "스타일",
+      "description": "전역 및 컴포넌트 단위의 CSS 스타일 정의.",
+      "nodeIds": ["file:src/App.css", "file:src/index.css"]
+    },
+    {
+      "id": "layer:build-config",
+      "name": "빌드 & 설정",
+      "description": "빌드 도구, 린터, 패키지 매니페스트 등 프로젝트 설정 파일.",
+      "nodeIds": ["config:vite.config.js", "config:eslint.config.js", "config:package.json"]
+    },
+    {
+      "id": "layer:documentation",
+      "name": "문서",
+      "description": "프로젝트 사용법과 안내를 담은 문서.",
+      "nodeIds": ["document:README.md"]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "프로젝트 개요",
+      "description": "README로 시작해 이 프로젝트가 React + Vite 스타터 템플릿임을 파악한다. 사용 가능한 플러그인과 확장 방법을 확인한다.",
+      "nodeIds": ["document:README.md"],
+      "languageLesson": "Markdown 문서는 코드가 아니지만 프로젝트의 의도와 설정 방향을 알려주는 1차 자료다."
+    },
+    {
+      "order": 2,
+      "title": "HTML 호스트와 진입점",
+      "description": "index.html이 #root 컨테이너와 module 스크립트를 정의하고, main.jsx가 createRoot로 App을 StrictMode에 마운트하는 부팅 흐름을 따라간다.",
+      "nodeIds": ["file:index.html", "file:src/main.jsx"],
+      "languageLesson": "Vite에서는 index.html이 빌드의 실제 진입점이며, module 스크립트로 JS 번들을 로드한다."
+    },
+    {
+      "order": 3,
+      "title": "메인 App 컴포넌트",
+      "description": "App.jsx에서 useState로 카운터 상태를 관리하고 히어로, 카운터 버튼, 링크 섹션을 렌더링하는 함수형 컴포넌트 구조를 살펴본다.",
+      "nodeIds": ["file:src/App.jsx"],
+      "languageLesson": "함수형 컴포넌트는 JSX를 반환하는 함수이며, useState 훅으로 렌더 사이에 상태를 유지한다."
+    },
+    {
+      "order": 4,
+      "title": "스타일링",
+      "description": "전역 스타일(index.css)과 컴포넌트 전용 스타일(App.css)이 어떻게 나뉘어 UI에 적용되는지 확인한다.",
+      "nodeIds": ["file:src/index.css", "file:src/App.css"]
+    },
+    {
+      "order": 5,
+      "title": "빌드 & 개발 도구",
+      "description": "vite.config.js의 React 플러그인 설정, eslint.config.js의 린트 규칙, package.json의 의존성과 스크립트로 개발 워크플로가 어떻게 구성되는지 마무리한다.",
+      "nodeIds": ["config:vite.config.js", "config:eslint.config.js", "config:package.json"]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+.box {
+    border: 1px solid;
+    width: 120px;
+    height: 120px;
+    display: flex; /*글자를 가운데 두기 위한 준비*/
+    align-items: center;
+    justify-content: center;
+    background-color: lightblue;
+    color: darkblue;
+    border-radius: 10px;
+    transition: 0.5s; /*마우스 올렸을 때 0.5초에 걸쳐 부드럽게*/
+    perspective: 700px; /* 3d화면 구성*/
+}
+
+.box:hover {
+    transform: rotate(360deg) scale(4.7); /*마우스 올렸을 때 360도 회전*/
+}
+
+.box2 {
+    border: 1px solid;
+    width: 120px;
+    height: 120px;
+    display: flex; /*글자를 가운데 두기 위한 준비*/
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(24, 114, 24) darkblue rgb(132, 13, 136);
+    color: pink;
+    border-radius: 10px;
+    transition: 0.5s; /*마우스 올렸을 때 0.5초에 걸쳐 부드럽게*/
+    perspective: 700px; /* 3d화면 구성*/
+}
+
+.box2:hover {
+    transform: rotate(-360deg) scale(12.7); /*마우스 올렸을 때 360도 회전*/
+}

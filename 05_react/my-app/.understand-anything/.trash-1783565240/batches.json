@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "algorithm": "louvain",
+  "totalFiles": 11,
+  "totalBatches": 2,
+  "exportsByPath": {
+    ".understand-anything/.understandignore": [],
+    "eslint.config.js": [],
+    "src/App.jsx": [],
+    "src/main.jsx": [],
+    "vite.config.js": []
+  },
+  "batches": [
+    {
+      "batchIndex": 1,
+      "files": [
+        {
+          "path": "README.md",
+          "language": "markdown",
+          "sizeLines": 16,
+          "fileCategory": "docs"
+        },
+        {
+          "path": "index.html",
+          "language": "html",
+          "sizeLines": 13,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "package.json",
+          "language": "json",
+          "sizeLines": 27,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        "README.md": [],
+        "index.html": [],
+        "package.json": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 2,
+      "files": [
+        {
+          "path": ".understand-anything/.understandignore",
+          "language": "unknown",
+          "sizeLines": 57,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".understand-anything/config.json",
+          "language": "json",
+          "sizeLines": 1,
+          "fileCategory": "config"
+        },
+        {
+          "path": "eslint.config.js",
+          "language": "javascript",
+          "sizeLines": 21,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/App.css",
+          "language": "css",
+          "sizeLines": 184,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "src/App.jsx",
+          "language": "javascript",
+          "sizeLines": 122,
+          "fileCategory": "code"
+        },
+        {
+          "path": "src/index.css",
+          "language": "css",
+          "sizeLines": 111,
+          "fileCategory": "markup"
+        },
+        {
+          "path": "src/main.jsx",
+          "language": "javascript",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        },
+        {
+          "path": "vite.config.js",
+          "language": "javascript",
+          "sizeLines": 7,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        ".understand-anything/.understandignore": [],
+        ".understand-anything/config.json": [],
+        "eslint.config.js": [],
+        "src/App.css": [],
+        "src/App.jsx": [
+          "src/App.css"
+        ],
+        "src/index.css": [],
+        "src/main.jsx": [
+          "src/App.jsx",
+          "src/index.css"
+        ],
+        "vite.config.js": []
+      },
+      "neighborMap": {}
+    }
+  ]
+}

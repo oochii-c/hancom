@@ -1,0 +1,287 @@
+{
+  "scriptCompleted": true,
+  "entryPointCandidates": [
+    {
+      "id": "document:README.md",
+      "score": 5,
+      "name": "README.md",
+      "summary": "React + Vite 프로젝트의 시작 가이드 문서로, HMR 지원 플러그인 소개와 ESLint 구성 방법을 안내합니다."
+    },
+    {
+      "id": "file:src/main.jsx",
+      "score": 5,
+      "name": "main.jsx",
+      "summary": "React 19의 createRoot API를 사용하여 App 컴포넌트를 DOM에 마운트하는 애플리케이션 부트스트랩 진입점입니다."
+    },
+    {
+      "id": "config:package.json",
+      "score": 3,
+      "name": "package.json",
+      "summary": "프로젝트의 npm 패키지 설정 파일로, React와 Vite 기반의 의존성과 dev/build/lint/preview 스크립트를 정의합니다."
+    },
+    {
+      "id": "file:index.html",
+      "score": 2,
+      "name": "index.html",
+      "summary": "Vite 빌드의 HTML 진입점으로, React 앱 루트 마운트 포인트(#root div)를 제공하고 src/main.jsx를 모듈 스크립트로 로드합니다."
+    },
+    {
+      "id": "file:.understand-anything/.understandignore",
+      "score": 2,
+      "name": ".understandignore",
+      "summary": "understand-anything 플러그인이 분석 시 무시할 파일 패턴을 정의합니다."
+    }
+  ],
+  "fanInRanking": [
+    {
+      "id": "file:src/main.jsx",
+      "fanIn": 5,
+      "name": "main.jsx"
+    },
+    {
+      "id": "file:src/App.jsx",
+      "fanIn": 3,
+      "name": "App.jsx"
+    },
+    {
+      "id": "file:eslint.config.js",
+      "fanIn": 1,
+      "name": "eslint.config.js"
+    },
+    {
+      "id": "file:src/App.css",
+      "fanIn": 1,
+      "name": "App.css"
+    },
+    {
+      "id": "file:src/index.css",
+      "fanIn": 1,
+      "name": "index.css"
+    },
+    {
+      "id": "file:vite.config.js",
+      "fanIn": 1,
+      "name": "vite.config.js"
+    },
+    {
+      "id": "document:README.md",
+      "fanIn": 0,
+      "name": "README.md"
+    },
+    {
+      "id": "file:index.html",
+      "fanIn": 0,
+      "name": "index.html"
+    },
+    {
+      "id": "config:package.json",
+      "fanIn": 0,
+      "name": "package.json"
+    },
+    {
+      "id": "file:.understand-anything/.understandignore",
+      "fanIn": 0,
+      "name": ".understandignore"
+    },
+    {
+      "id": "config:.understand-anything/config.json",
+      "fanIn": 0,
+      "name": "config.json"
+    }
+  ],
+  "fanOutRanking": [
+    {
+      "id": "config:package.json",
+      "fanOut": 3,
+      "name": "package.json"
+    },
+    {
+      "id": "file:src/main.jsx",
+      "fanOut": 3,
+      "name": "main.jsx"
+    },
+    {
+      "id": "file:eslint.config.js",
+      "fanOut": 2,
+      "name": "eslint.config.js"
+    },
+    {
+      "id": "document:README.md",
+      "fanOut": 1,
+      "name": "README.md"
+    },
+    {
+      "id": "file:index.html",
+      "fanOut": 1,
+      "name": "index.html"
+    },
+    {
+      "id": "file:src/App.jsx",
+      "fanOut": 1,
+      "name": "App.jsx"
+    },
+    {
+      "id": "file:vite.config.js",
+      "fanOut": 1,
+      "name": "vite.config.js"
+    },
+    {
+      "id": "file:.understand-anything/.understandignore",
+      "fanOut": 0,
+      "name": ".understandignore"
+    },
+    {
+      "id": "config:.understand-anything/config.json",
+      "fanOut": 0,
+      "name": "config.json"
+    },
+    {
+      "id": "file:src/App.css",
+      "fanOut": 0,
+      "name": "App.css"
+    },
+    {
+      "id": "file:src/index.css",
+      "fanOut": 0,
+      "name": "index.css"
+    }
+  ],
+  "bfsTraversal": {
+    "startNode": "file:src/main.jsx",
+    "order": [
+      "file:src/main.jsx",
+      "file:src/App.jsx",
+      "file:src/index.css",
+      "file:src/App.css"
+    ],
+    "depthMap": {
+      "file:src/main.jsx": 0,
+      "file:src/App.jsx": 1,
+      "file:src/index.css": 1,
+      "file:src/App.css": 2
+    },
+    "byDepth": {
+      "0": [
+        "file:src/main.jsx"
+      ],
+      "1": [
+        "file:src/App.jsx",
+        "file:src/index.css"
+      ],
+      "2": [
+        "file:src/App.css"
+      ]
+    }
+  },
+  "nonCodeFiles": {
+    "documentation": [
+      {
+        "id": "document:README.md",
+        "name": "README.md",
+        "type": "document",
+        "summary": "React + Vite 프로젝트의 시작 가이드 문서로, HMR 지원 플러그인 소개와 ESLint 구성 방법을 안내합니다."
+      }
+    ],
+    "infrastructure": [],
+    "data": [],
+    "config": [
+      {
+        "id": "config:package.json",
+        "name": "package.json",
+        "type": "config",
+        "summary": "프로젝트의 npm 패키지 설정 파일로, React와 Vite 기반의 의존성과 dev/build/lint/preview 스크립트를 정의합니다."
+      },
+      {
+        "id": "config:.understand-anything/config.json",
+        "name": "config.json",
+        "type": "config",
+        "summary": "understand-anything 플러그인의 출력 언어를 제어하는 설정 파일입니다."
+      }
+    ]
+  },
+  "clusters": [],
+  "layers": {
+    "count": 4,
+    "list": [
+      {
+        "id": "layer:ui",
+        "name": "UI 레이어",
+        "description": "React 루트 컴포넌트와 스타일시트를 포함하는 사용자 인터페이스 레이어"
+      },
+      {
+        "id": "layer:entry",
+        "name": "진입점 레이어",
+        "description": "애플리케이션 부트스트랩과 HTML 셸을 담당하는 진입점 레이어"
+      },
+      {
+        "id": "layer:config",
+        "name": "설정",
+        "description": "Vite, ESLint, npm 패키지 설정 파일을 포함하는 프로젝트 구성 레이어"
+      },
+      {
+        "id": "layer:documentation",
+        "name": "문서",
+        "description": "프로젝트 문서 레이어"
+      }
+    ]
+  },
+  "nodeSummaryIndex": {
+    "document:README.md": {
+      "name": "README.md",
+      "type": "document",
+      "summary": "React + Vite 프로젝트의 시작 가이드 문서로, HMR 지원 플러그인 소개와 ESLint 구성 방법을 안내합니다."
+    },
+    "file:index.html": {
+      "name": "index.html",
+      "type": "file",
+      "summary": "Vite 빌드의 HTML 진입점으로, React 앱 루트 마운트 포인트(#root div)를 제공하고 src/main.jsx를 모듈 스크립트로 로드합니다."
+    },
+    "config:package.json": {
+      "name": "package.json",
+      "type": "config",
+      "summary": "프로젝트의 npm 패키지 설정 파일로, React와 Vite 기반의 의존성과 dev/build/lint/preview 스크립트를 정의합니다."
+    },
+    "file:.understand-anything/.understandignore": {
+      "name": ".understandignore",
+      "type": "file",
+      "summary": "understand-anything 플러그인이 분석 시 무시할 파일 패턴을 정의합니다."
+    },
+    "config:.understand-anything/config.json": {
+      "name": "config.json",
+      "type": "config",
+      "summary": "understand-anything 플러그인의 출력 언어를 제어하는 설정 파일입니다."
+    },
+    "file:eslint.config.js": {
+      "name": "eslint.config.js",
+      "type": "file",
+      "summary": "React 및 React Hooks 린트 규칙을 포함한 ESLint flat config 설정 파일입니다."
+    },
+    "file:src/App.css": {
+      "name": "App.css",
+      "type": "file",
+      "summary": "App 루트 컴포넌트에 적용되는 스타일시트로, 로고 애니메이션, 카드 레이아웃, 버튼 스타일을 정의합니다."
+    },
+    "file:src/App.jsx": {
+      "name": "App.jsx",
+      "type": "file",
+      "summary": "React 애플리케이션의 루트 컴포넌트로, useState 훅을 이용한 카운터 기능과 Vite/React 로고를 포함하는 기본 UI를 렌더링합니다."
+    },
+    "file:src/index.css": {
+      "name": "index.css",
+      "type": "file",
+      "summary": "애플리케이션 전역 스타일시트로, CSS 커스텀 프로퍼티와 color-scheme 미디어쿼리를 활용한 다크/라이트 테마를 지원합니다."
+    },
+    "file:src/main.jsx": {
+      "name": "main.jsx",
+      "type": "file",
+      "summary": "React 19의 createRoot API를 사용하여 App 컴포넌트를 DOM에 마운트하는 애플리케이션 부트스트랩 진입점입니다."
+    },
+    "file:vite.config.js": {
+      "name": "vite.config.js",
+      "type": "file",
+      "summary": "React 플러그인을 활성화하는 Vite 빌드 도구 설정 파일로, HMR 및 JSX 변환을 지원합니다."
+    }
+  },
+  "totalNodes": 11,
+  "totalEdges": 12
+}

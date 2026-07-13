@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main.css">
+    <title>positioning</title>
+</head>
+<body>
+    <h4>position</h4>
+    <div class="parent">
+        <span class="ptag">부모(relative)</span>
+        <!-- relative: 원래 자리에서 오른쪽 아래로 살짝 이동-->
+        <div class="rel">relative</div>
+        <!-- absolute: 가장 가까운 position 부모 기준 오른쪽 위-->
+        <div class="abs">absolute</div>
+    </div>
+    <!--fixed: 화면 오른쪽 아래 고정, 스크롤해도 그대로-->
+    <div class="fixed">fixed</div>
+    <!-- sticky: 스크롤하다 top:0 지점에 닿으면 화면 상단에 착 붙음-->
+    <div class="sticky">sticky</div>
+    <p>일반 글은 원래 흐름대로 흐름</p>
+    <p>아래로 스크롤하면 fixed는 그대로, sticky는 위에 착 붙는걸 볼수있다</p>
+</body>
+</html>

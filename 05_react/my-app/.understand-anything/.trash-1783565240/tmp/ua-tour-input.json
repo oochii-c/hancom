@@ -1,0 +1,35 @@
+{
+  "nodes": [
+    {"id": "document:README.md", "type": "document", "name": "README.md", "filePath": "README.md", "summary": "React + Vite 프로젝트의 시작 가이드 문서로, HMR 지원 플러그인 소개와 ESLint 구성 방법을 안내합니다."},
+    {"id": "file:index.html", "type": "file", "name": "index.html", "filePath": "index.html", "summary": "Vite 빌드의 HTML 진입점으로, React 앱 루트 마운트 포인트(#root div)를 제공하고 src/main.jsx를 모듈 스크립트로 로드합니다."},
+    {"id": "config:package.json", "type": "config", "name": "package.json", "filePath": "package.json", "summary": "프로젝트의 npm 패키지 설정 파일로, React와 Vite 기반의 의존성과 dev/build/lint/preview 스크립트를 정의합니다."},
+    {"id": "file:.understand-anything/.understandignore", "type": "file", "name": ".understandignore", "filePath": ".understand-anything/.understandignore", "summary": "understand-anything 플러그인이 분석 시 무시할 파일 패턴을 정의합니다."},
+    {"id": "config:.understand-anything/config.json", "type": "config", "name": "config.json", "filePath": ".understand-anything/config.json", "summary": "understand-anything 플러그인의 출력 언어를 제어하는 설정 파일입니다."},
+    {"id": "file:eslint.config.js", "type": "file", "name": "eslint.config.js", "filePath": "eslint.config.js", "summary": "React 및 React Hooks 린트 규칙을 포함한 ESLint flat config 설정 파일입니다."},
+    {"id": "file:src/App.css", "type": "file", "name": "App.css", "filePath": "src/App.css", "summary": "App 루트 컴포넌트에 적용되는 스타일시트로, 로고 애니메이션, 카드 레이아웃, 버튼 스타일을 정의합니다."},
+    {"id": "file:src/App.jsx", "type": "file", "name": "App.jsx", "filePath": "src/App.jsx", "summary": "React 애플리케이션의 루트 컴포넌트로, useState 훅을 이용한 카운터 기능과 Vite/React 로고를 포함하는 기본 UI를 렌더링합니다."},
+    {"id": "file:src/index.css", "type": "file", "name": "index.css", "filePath": "src/index.css", "summary": "애플리케이션 전역 스타일시트로, CSS 커스텀 프로퍼티와 color-scheme 미디어쿼리를 활용한 다크/라이트 테마를 지원합니다."},
+    {"id": "file:src/main.jsx", "type": "file", "name": "main.jsx", "filePath": "src/main.jsx", "summary": "React 19의 createRoot API를 사용하여 App 컴포넌트를 DOM에 마운트하는 애플리케이션 부트스트랩 진입점입니다."},
+    {"id": "file:vite.config.js", "type": "file", "name": "vite.config.js", "filePath": "vite.config.js", "summary": "React 플러그인을 활성화하는 Vite 빌드 도구 설정 파일로, HMR 및 JSX 변환을 지원합니다."}
+  ],
+  "edges": [
+    {"source": "document:README.md", "target": "file:src/main.jsx", "type": "documents"},
+    {"source": "file:index.html", "target": "file:src/main.jsx", "type": "depends_on"},
+    {"source": "config:package.json", "target": "file:src/main.jsx", "type": "configures"},
+    {"source": "config:package.json", "target": "file:vite.config.js", "type": "configures"},
+    {"source": "config:package.json", "target": "file:eslint.config.js", "type": "configures"},
+    {"source": "file:src/App.jsx", "target": "file:src/App.css", "type": "imports"},
+    {"source": "file:src/main.jsx", "target": "file:src/App.jsx", "type": "imports"},
+    {"source": "file:src/main.jsx", "target": "file:src/index.css", "type": "imports"},
+    {"source": "file:src/main.jsx", "target": "file:src/App.jsx", "type": "depends_on"},
+    {"source": "file:eslint.config.js", "target": "file:src/App.jsx", "type": "configures"},
+    {"source": "file:eslint.config.js", "target": "file:src/main.jsx", "type": "configures"},
+    {"source": "file:vite.config.js", "target": "file:src/main.jsx", "type": "configures"}
+  ],
+  "layers": [
+    {"id": "layer:ui", "name": "UI 레이어", "description": "React 루트 컴포넌트와 스타일시트를 포함하는 사용자 인터페이스 레이어"},
+    {"id": "layer:entry", "name": "진입점 레이어", "description": "애플리케이션 부트스트랩과 HTML 셸을 담당하는 진입점 레이어"},
+    {"id": "layer:config", "name": "설정", "description": "Vite, ESLint, npm 패키지 설정 파일을 포함하는 프로젝트 구성 레이어"},
+    {"id": "layer:documentation", "name": "문서", "description": "프로젝트 문서 레이어"}
+  ]
+}

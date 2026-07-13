@@ -1,0 +1,21 @@
+.card  {
+    width: 150px;
+    height: 100px;
+    display: flex; align-items: center; justify-content: center;
+    background: blue;
+    border: 5px solid #4e456e;
+    border-radius: 8px;
+    font-weight: bold;
+    color: #ffffff;
+    opacity: 0.8;
+    box-shadow: 0 6px 18px rgba(48, 114, 10);
+    transition: all 0.3s ease; /*바뀔때 0.3초에 걸쳐 변화*/
+}
+
+/*마우스 올리면 떠오르고 또렷해지고 그림자도 커짐*/
+
+.card:hover {
+    transform: translateY(-8px);
+    opacity: 1;
+    box-shadow: 0 12px 24px rgb(153, 44, 148);
+}

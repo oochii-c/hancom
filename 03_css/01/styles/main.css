@@ -1,0 +1,6 @@
+/*body => h1, img, p, ul => .special(클래스) => a : 일반 => 구체 순서*/
+
+h3 { color: red;}
+p { color: green}
+.special {color: orange}
+li em{color: gray}

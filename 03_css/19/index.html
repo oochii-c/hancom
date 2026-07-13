@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/main.css">
+    <title>scroll draw line test</title>
+</head>
+<body>
+    <div class="spacer">위로 스크롤 해보세요 ↓</div>
+
+    <div class="draw-wrap">
+        <svg class="draw-svg" viewBox="0 0 400 800" preserveAspectRatio="none">
+            <path
+                class="draw-path"
+                d="M 50 0
+                   C 350 100, 50 200, 350 300
+                   C 50 400, 350 500, 200 650
+                   L 200 800"
+                fill="none"
+                stroke="#b64522"
+                stroke-width="6"
+                stroke-linecap="round"
+            />
+        </svg>
+    </div>
+
+    <div class="spacer">끝까지 내리면 선이 다 그려져요</div>
+
+    <script src="./scroll-draw.js"></script>
+</body>
+</html>

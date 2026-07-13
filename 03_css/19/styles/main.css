@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+.spacer {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-weight: bold;
+}
+
+.draw-wrap {
+    width: 400px;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.draw-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/*JS에서 stroke-dasharray/offset 초기값을 넣어주기 전까지는 선이 그냥 다 보이는 상태*/
+.draw-path {
+    transition: stroke-dashoffset 0.05s linear;
+}

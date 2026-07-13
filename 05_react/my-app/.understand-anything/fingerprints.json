@@ -1,0 +1,201 @@
+{
+  "version": "1.0.0",
+  "gitCommitHash": "476c13a5d0357b1b7138bf41540dd639474f621d",
+  "generatedAt": "2026-07-09T02:47:11.400Z",
+  "files": {
+    "eslint.config.js": {
+      "filePath": "eslint.config.js",
+      "contentHash": "0197d9a843aaae267303c4d1ab1a43afad1afacc7646cdf6cf94a5af6b815fb8",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@eslint/js",
+          "specifiers": [
+            "js"
+          ]
+        },
+        {
+          "source": "globals",
+          "specifiers": [
+            "globals"
+          ]
+        },
+        {
+          "source": "eslint-plugin-react-hooks",
+          "specifiers": [
+            "reactHooks"
+          ]
+        },
+        {
+          "source": "eslint-plugin-react-refresh",
+          "specifiers": [
+            "reactRefresh"
+          ]
+        },
+        {
+          "source": "eslint/config",
+          "specifiers": [
+            "defineConfig",
+            "globalIgnores"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 22,
+      "hasStructuralAnalysis": true
+    },
+    "index.html": {
+      "filePath": "index.html",
+      "contentHash": "b8a3794077643858b5d835107dd628f48cb6fc7bc1729b686999506d8b13a395",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 14,
+      "hasStructuralAnalysis": false
+    },
+    "package.json": {
+      "filePath": "package.json",
+      "contentHash": "b071c740150f8dbe45e8d7d38639d020d9fa97b294650ba1e76fbaaeac8325d0",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 28,
+      "hasStructuralAnalysis": true
+    },
+    "README.md": {
+      "filePath": "README.md",
+      "contentHash": "a460b4dc7e6392e76aa54d844c9261b8db0adb7f967ba8300526456f1dcf5fb4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 17,
+      "hasStructuralAnalysis": true
+    },
+    "src/App.css": {
+      "filePath": "src/App.css",
+      "contentHash": "6e25a776d3e8102da5bacb3cb99f4a5fc662a2e01e6143140671a556d28c3d5c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 185,
+      "hasStructuralAnalysis": false
+    },
+    "src/App.jsx": {
+      "filePath": "src/App.jsx",
+      "contentHash": "4b05846ff1a4f212ba2cf8266cca977545d4f97e53301d9eeb933a9e4162cf63",
+      "functions": [
+        {
+          "name": "App",
+          "params": [],
+          "exported": false,
+          "lineCount": 114
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "useState"
+          ]
+        },
+        {
+          "source": "./assets/react.svg",
+          "specifiers": [
+            "reactLogo"
+          ]
+        },
+        {
+          "source": "./assets/vite.svg",
+          "specifiers": [
+            "viteLogo"
+          ]
+        },
+        {
+          "source": "./assets/hero.png",
+          "specifiers": [
+            "heroImg"
+          ]
+        },
+        {
+          "source": "./App.css",
+          "specifiers": []
+        }
+      ],
+      "exports": [],
+      "totalLines": 123,
+      "hasStructuralAnalysis": true
+    },
+    "src/index.css": {
+      "filePath": "src/index.css",
+      "contentHash": "fda85fffe7f006d822fb9ab4e774b9e2b8fadffa73a3806b038dc0b8456cbbeb",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 112,
+      "hasStructuralAnalysis": false
+    },
+    "src/main.jsx": {
+      "filePath": "src/main.jsx",
+      "contentHash": "4b4b864dbe45253425d0c925337180ec07e204295179f80f59551216f466f618",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "react",
+          "specifiers": [
+            "StrictMode"
+          ]
+        },
+        {
+          "source": "react-dom/client",
+          "specifiers": [
+            "createRoot"
+          ]
+        },
+        {
+          "source": "./index.css",
+          "specifiers": []
+        },
+        {
+          "source": "./App.jsx",
+          "specifiers": [
+            "App"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 11,
+      "hasStructuralAnalysis": true
+    },
+    "vite.config.js": {
+      "filePath": "vite.config.js",
+      "contentHash": "4d36db3522a7b2dd10e0936e1004373c7ee65f10f7cd7920cd76410459c15a45",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "vite",
+          "specifiers": [
+            "defineConfig"
+          ]
+        },
+        {
+          "source": "@vitejs/plugin-react",
+          "specifiers": [
+            "react"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 8,
+      "hasStructuralAnalysis": true
+    }
+  }
+}

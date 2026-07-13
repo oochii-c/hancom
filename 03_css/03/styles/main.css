@@ -1,0 +1,13 @@
+/*
+Node js 설치에서 npm 버전 확인 불가
+파워쉘 권한 문제로 보이며 터미널에서 아래 명령어로 해걸 
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+파워쉘이 npm에 관여한 이유는 자체적인 방화 시스템으로 걸렸는듯
+*/
+.box{
+    background-color: hotpink;
+    border-radius: 16px;
+    color: white;
+    height: 120px;
+    width: 120px;
+}

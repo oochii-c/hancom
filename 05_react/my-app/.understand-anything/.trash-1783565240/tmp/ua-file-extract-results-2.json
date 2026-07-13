@@ -1,0 +1,124 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 8,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".understand-anything/.understandignore",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 57,
+      "nonEmptyLines": 53,
+      "metrics": {}
+    },
+    {
+      "path": ".understand-anything/config.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "sections": [
+        {
+          "heading": "outputLanguage",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "eslint.config.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 21,
+      "nonEmptyLines": 20,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/App.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 184,
+      "nonEmptyLines": 158,
+      "metrics": {}
+    },
+    {
+      "path": "src/App.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 122,
+      "nonEmptyLines": 116,
+      "functions": [
+        {
+          "name": "App",
+          "startLine": 7,
+          "endLine": 120,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "App",
+          "callee": "useState",
+          "lineNumber": 8
+        },
+        {
+          "caller": "App",
+          "callee": "setCount",
+          "lineNumber": 27
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/index.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 111,
+      "nonEmptyLines": 100,
+      "metrics": {}
+    },
+    {
+      "path": "src/main.jsx",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 9,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "vite.config.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 7,
+      "nonEmptyLines": 6,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

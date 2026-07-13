@@ -1,0 +1,16 @@
+{
+  "projectRoot": "C:\\Users\\Har08\\desktop\\hancom\\05_react\\my-app",
+  "files": [
+    {"path": ".understand-anything/.understandignore", "language": "unknown", "fileCategory": "code"},
+    {"path": ".understand-anything/config.json", "language": "json", "fileCategory": "config"},
+    {"path": "eslint.config.js", "language": "javascript", "fileCategory": "code"},
+    {"path": "index.html", "language": "html", "fileCategory": "markup"},
+    {"path": "package.json", "language": "json", "fileCategory": "config"},
+    {"path": "README.md", "language": "markdown", "fileCategory": "docs"},
+    {"path": "src/App.css", "language": "css", "fileCategory": "markup"},
+    {"path": "src/App.jsx", "language": "javascript", "fileCategory": "code"},
+    {"path": "src/index.css", "language": "css", "fileCategory": "markup"},
+    {"path": "src/main.jsx", "language": "javascript", "fileCategory": "code"},
+    {"path": "vite.config.js", "language": "javascript", "fileCategory": "code"}
+  ]
+}

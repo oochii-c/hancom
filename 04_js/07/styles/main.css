@@ -1,0 +1,16 @@
+#out { 
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 12px;
+}
+
+input {
+    width: 60px;
+    padding: 6px;
+    font-size: 14px;
+}
+
+button {
+    padding: 6px 14px;
+    font-size: 14px;
+}

@@ -1,0 +1,416 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #d9d9d9;
+  font-family: system-ui, "Malgun Gothic", sans-serif;
+  padding: 40px;
+}
+
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ---------- 1. showcase ---------- */
+.showcase {
+  display: flex;
+  gap: 8px;
+}
+
+/* 라디오는 화면에서 숨기고 label(탭 숫자)로만 조작 */
+.shot-radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.showcase-viewer {
+  position: relative;
+  flex: 3;
+  aspect-ratio: 621 / 305; /* 스크린샷 원본 비율에 맞춤 */
+  background: #2b2b2b;
+  color: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+/* 체크된 라디오에 대응하는 slide만 노출 + 클릭 가능 */
+#shot-1:checked ~ .showcase-viewer .slide-1,
+#shot-2:checked ~ .showcase-viewer .slide-2,
+#shot-3:checked ~ .showcase-viewer .slide-3,
+#shot-4:checked ~ .showcase-viewer .slide-4,
+#shot-5:checked ~ .showcase-viewer .slide-5 {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.img-switch {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.shot-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.shot-off {
+  opacity: 1;
+}
+
+.img-switch:checked ~ .shot-off {
+  opacity: 0;
+}
+
+.img-switch:checked ~ .shot-on {
+  opacity: 1;
+}
+
+/* 이미지 앞/뒤 상태를 바꾸는 스위치 UI */
+.switch-toggle {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  width: 36px;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.switch-toggle::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.img-switch:checked ~ .switch-toggle {
+  background: #403AE0;
+}
+
+.img-switch:checked ~ .switch-toggle::before {
+  transform: translateX(16px);
+}
+
+.showcase-tabs {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 2;
+}
+
+.showcase-tabs label {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 0.65rem;
+  cursor: pointer;
+}
+
+#shot-1:checked ~ .showcase-viewer .showcase-tabs label[for="shot-1"],
+#shot-2:checked ~ .showcase-viewer .showcase-tabs label[for="shot-2"],
+#shot-3:checked ~ .showcase-viewer .showcase-tabs label[for="shot-3"],
+#shot-4:checked ~ .showcase-viewer .showcase-tabs label[for="shot-4"],
+#shot-5:checked ~ .showcase-viewer .showcase-tabs label[for="shot-5"] {
+  background: #f4d10a;
+  color: #000;
+}
+
+.showcase-desc {
+  position: relative;
+  flex: 1;
+  background: #9a9aab;
+  color: #fff;
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.desc {
+  position: absolute;
+  inset: 16px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+#shot-1:checked ~ .showcase-desc .desc-1,
+#shot-2:checked ~ .showcase-desc .desc-2,
+#shot-3:checked ~ .showcase-desc .desc-3,
+#shot-4:checked ~ .showcase-desc .desc-4,
+#shot-5:checked ~ .showcase-desc .desc-5 {
+  opacity: 1;
+}
+
+/* ---------- 2. about row ---------- */
+.about-row {
+  position: relative;
+  display: flex;
+  gap: 8px;
+}
+
+.cat-radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.box {
+  background: #7c7c96;
+  color: #fff;
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.category-box,
+.code-box {
+  flex: 1;
+}
+
+.intro-box {
+  position: relative;
+  flex: 2;
+  background: #fff;
+  min-height: 320px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.intro-shot {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 체크된 카테고리에 대응하는 자기소개 스크린샷만 노출 */
+#cat-1:checked ~ .intro-box .intro-shot-1,
+#cat-2:checked ~ .intro-box .intro-shot-2 {
+  display: block;
+}
+
+.category-box ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.category-box li {
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.category-box label {
+  display: block;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 6px 8px;
+  cursor: pointer;
+}
+
+/* 선택된 카테고리 라벨 강조 */
+#cat-1:checked ~ .category-box li:nth-child(1) label,
+#cat-2:checked ~ .category-box li:nth-child(2) label,
+#cat-3:checked ~ .category-box li:nth-child(3) label,
+#cat-4:checked ~ .category-box li:nth-child(4) label {
+  background: rgba(255, 255, 255, 0.4);
+  font-weight: 600;
+}
+
+.code-box {
+  position: relative;
+}
+
+.code-box pre {
+  font-size: 0.8rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.code-box p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.code-snippet {
+  display: none;
+}
+
+/* 체크된 카테고리에 대응하는 코드만 노출 */
+#cat-1:checked ~ .code-box .code-1,
+#cat-2:checked ~ .code-box .code-2,
+#cat-3:checked ~ .code-box .code-3,
+#cat-4:checked ~ .code-box .code-4 {
+  display: block;
+}
+
+/* ---------- 3. quiz ---------- */
+.quiz-title {
+  background: #64607f;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+/* 문제 5개를 쌓아두고 한 번에 하나만 보여주는 스텝퍼 */
+.quiz-flow {
+  position: relative;
+  min-height: 170px;
+}
+
+.q-block {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease 2.5s;
+}
+
+.q-block:first-child {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 이 문제의 선지 중 하나라도 체크되면(=답을 고르면) 사라지고 다음 문제가 나타남 */
+/* !important: 바로 아래 "다음 문제 보여주기" 규칙보다 우선순위가 낮아서 안 사라지는 문제 방지 */
+.q-block:has(.quiz-check:checked) {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.q-block:has(.quiz-check:checked) + .q-block {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.q-text {
+  font-size: 0.9rem;
+}
+
+.q-done {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.quiz-cards {
+  display: flex;
+  gap: 8px;
+}
+
+.q-text-box {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  padding: 8px;
+  background: #5a5a5a;
+  color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.quiz-card {
+  flex: 1;
+  aspect-ratio: 1;
+  perspective: 600px;
+  cursor: pointer;
+}
+
+.quiz-check {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease;
+}
+
+/* 선지 중 하나라도 고르면 이 문제의 카드 5장이 전부 뒤집혀서 정답을 보여줌 */
+.q-block:has(.quiz-check:checked) .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px;
+  border-radius: 4px;
+  backface-visibility: hidden;
+  font-size: 0.85rem;
+}
+
+.card-face.front {
+  background: #5a5a5a;
+  color: #fff;
+  border: 1px solid #ccc;
+}
+
+.card-face.back {
+  background: #e74c3c;
+  border: 1px solid #c0392b;
+  color: #fff;
+  font-weight: 600;
+  transform: rotateY(180deg);
+  font-size: 1rem;
+}
+
+.quiz-card.is-correct .card-face.back {
+  background: #2ecc71;
+  border-color: #27ae60;
+}

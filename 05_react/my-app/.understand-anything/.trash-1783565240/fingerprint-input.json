@@ -1,0 +1,15 @@
+{
+  "projectRoot": "C:/Users/Har08/desktop/hancom/05_react/my-app",
+  "sourceFilePaths": [
+    "eslint.config.js",
+    "index.html",
+    "package.json",
+    "README.md",
+    "src/App.css",
+    "src/App.jsx",
+    "src/index.css",
+    "src/main.jsx",
+    "vite.config.js"
+  ],
+  "gitCommitHash": "476c13a5d0357b1b7138bf41540dd639474f621d"
+}

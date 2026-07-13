@@ -1,0 +1,18 @@
+{
+  "fixedSectionOk": true,
+  "nodesRecovered": 0,
+  "edgesRestored": 0,
+  "crossBatchEdgesAdded": 0,
+  "typesRemapped": 0,
+  "complexityRemapped": 0,
+  "notes": [
+    "No merge script was run (Python not installed); manual merge produced 12 nodes and 14 edges.",
+    "All node IDs are correctly prefixed with valid type prefixes (document:, file:, config:, function:).",
+    "All complexity values are valid: 'simple' or 'moderate'. No unknown values found.",
+    "All node types are recognized: document, file, config, function. No unknown or aliased types found.",
+    "All three import edges required by importMap are present: src/App.jsx→src/App.css, src/main.jsx→src/App.jsx, src/main.jsx→src/index.css.",
+    "No dangling edges detected — every edge source and target resolves to an existing node.",
+    "No nodes without IDs found.",
+    "Graph is structurally sound and requires no corrections."
+  ]
+}

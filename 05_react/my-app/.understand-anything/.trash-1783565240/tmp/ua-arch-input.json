@@ -1,0 +1,34 @@
+{
+  "fileNodes": [
+    {"id": "document:README.md", "type": "document", "name": "README.md", "filePath": "README.md", "summary": "React + Vite 프로젝트의 시작 가이드 문서", "tags": ["documentation", "entry-point"]},
+    {"id": "file:index.html", "type": "file", "name": "index.html", "filePath": "index.html", "summary": "Vite 빌드의 HTML 진입점", "tags": ["entry-point", "markup", "html", "vite"]},
+    {"id": "config:package.json", "type": "config", "name": "package.json", "filePath": "package.json", "summary": "npm 패키지 설정 파일", "tags": ["configuration", "build-system"]},
+    {"id": "file:.understand-anything/.understandignore", "type": "file", "name": ".understandignore", "filePath": ".understand-anything/.understandignore", "summary": "분석 무시 패턴 설정 파일", "tags": ["configuration"]},
+    {"id": "config:.understand-anything/config.json", "type": "config", "name": "config.json", "filePath": ".understand-anything/config.json", "summary": "플러그인 설정 파일", "tags": ["configuration", "plugin"]},
+    {"id": "file:eslint.config.js", "type": "file", "name": "eslint.config.js", "filePath": "eslint.config.js", "summary": "ESLint flat config 설정 파일", "tags": ["configuration", "lint"]},
+    {"id": "file:src/App.css", "type": "file", "name": "App.css", "filePath": "src/App.css", "summary": "App 루트 컴포넌트 스타일시트", "tags": ["ui", "styling"]},
+    {"id": "file:src/App.jsx", "type": "file", "name": "App.jsx", "filePath": "src/App.jsx", "summary": "React 루트 컴포넌트", "tags": ["entry-point", "ui", "component"]},
+    {"id": "file:src/index.css", "type": "file", "name": "index.css", "filePath": "src/index.css", "summary": "전역 스타일시트", "tags": ["ui", "styling"]},
+    {"id": "file:src/main.jsx", "type": "file", "name": "main.jsx", "filePath": "src/main.jsx", "summary": "애플리케이션 부트스트랩 진입점", "tags": ["entry-point", "bootstrap"]},
+    {"id": "file:vite.config.js", "type": "file", "name": "vite.config.js", "filePath": "vite.config.js", "summary": "Vite 빌드 도구 설정 파일", "tags": ["configuration", "build-system"]}
+  ],
+  "importEdges": [
+    {"source": "file:src/App.jsx", "target": "file:src/App.css", "type": "imports"},
+    {"source": "file:src/main.jsx", "target": "file:src/App.jsx", "type": "imports"},
+    {"source": "file:src/main.jsx", "target": "file:src/index.css", "type": "imports"}
+  ],
+  "allEdges": [
+    {"source": "document:README.md", "target": "file:src/main.jsx", "type": "documents"},
+    {"source": "file:index.html", "target": "file:src/main.jsx", "type": "depends_on"},
+    {"source": "config:package.json", "target": "file:src/main.jsx", "type": "configures"},
+    {"source": "config:package.json", "target": "file:vite.config.js", "type": "configures"},
+    {"source": "config:package.json", "target": "file:eslint.config.js", "type": "configures"},
+    {"source": "file:src/App.jsx", "target": "file:src/App.css", "type": "imports"},
+    {"source": "file:src/main.jsx", "target": "file:src/App.jsx", "type": "imports"},
+    {"source": "file:src/main.jsx", "target": "file:src/index.css", "type": "imports"},
+    {"source": "file:src/main.jsx", "target": "file:src/App.jsx", "type": "depends_on"},
+    {"source": "file:eslint.config.js", "target": "file:src/App.jsx", "type": "configures"},
+    {"source": "file:eslint.config.js", "target": "file:src/main.jsx", "type": "configures"},
+    {"source": "file:vite.config.js", "target": "file:src/main.jsx", "type": "configures"}
+  ]
+}

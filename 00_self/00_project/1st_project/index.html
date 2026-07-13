@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>oochii 포트폴리오</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+  <div class="page">
+
+    <!-- 1. 마음에 드는 웹 사이트 찾고 의견 및 분석 -->
+    <section class="showcase">
+      <input type="radio" name="shot" id="shot-1" class="shot-radio" checked>
+      <input type="radio" name="shot" id="shot-2" class="shot-radio">
+      <input type="radio" name="shot" id="shot-3" class="shot-radio">
+      <input type="radio" name="shot" id="shot-4" class="shot-radio">
+      <input type="radio" name="shot" id="shot-5" class="shot-radio">
+
+      <div class="showcase-viewer">
+        <div class="slide slide-1">
+          <input type="checkbox" id="switch-1" class="img-switch">
+          <img class="shot-img shot-off" src="screenshot/01_1.png" alt="스크린샷 1 (기본)">
+          <img class="shot-img shot-on" src="screenshot/01_2.png" alt="스크린샷 1 (동작 후)">
+          <label for="switch-1" class="switch-toggle"></label>
+        </div>
+        <div class="slide slide-2">
+          <input type="checkbox" id="switch-2" class="img-switch">
+          <img class="shot-img shot-off" src="screenshot/02_1.png" alt="스크린샷 2 (기본)">
+          <img class="shot-img shot-on" src="screenshot/02_2.png" alt="스크린샷 2 (동작 후)">
+          <label for="switch-2" class="switch-toggle"></label>
+        </div>
+        <div class="slide slide-3">
+          <input type="checkbox" id="switch-3" class="img-switch">
+          <img class="shot-img shot-off" src="screenshot/03_1.png" alt="스크린샷 3 (기본)">
+          <img class="shot-img shot-on" src="screenshot/03_2.png" alt="스크린샷 3 (동작 후)">
+          <label for="switch-3" class="switch-toggle"></label>
+        </div>
+        <div class="slide slide-4">
+          <input type="checkbox" id="switch-4" class="img-switch">
+          <img class="shot-img shot-off" src="screenshot/04_1.png" alt="스크린샷 4 (기본)">
+          <img class="shot-img shot-on" src="screenshot/04_2.png" alt="스크린샷 4 (동작 후)">
+          <label for="switch-4" class="switch-toggle"></label>
+        </div>
+        <div class="slide slide-5">
+          <input type="checkbox" id="switch-5" class="img-switch">
+          <img class="shot-img shot-off" src="screenshot/05_1.png" alt="스크린샷 5 (기본)">
+          <img class="shot-img shot-on" src="screenshot/05_2.png" alt="스크린샷 5 (동작 후)">
+          <label for="switch-5" class="switch-toggle"></label>
+        </div>
+
+        <div class="showcase-tabs">
+          <label for="shot-1">1</label>
+          <label for="shot-2">2</label>
+          <label for="shot-3">3</label>
+          <label for="shot-4">4</label>
+          <label for="shot-5">5</label>
+        </div>
+      </div>
+
+      <div class="showcase-desc">
+        <p class="desc desc-1">평소에는 상단 메인 내비게이션 바를 숨겨 비주얼을 해치지 않다가, 커서에 반응해 활성화되는 디자인이 인상적입니다.</p>
+        <p class="desc desc-2">제품의 강점을 슬롯 형태로 스크롤에 따라 내려가게 하되, 마지막 슬롯은 제자리에 멈추지 않고 중앙보다 더 위로 올라가게 해서 콘텐츠가 끝났음을 시각적으로 알려줍니다.</p>
+        <p class="desc desc-3">스크롤에 따라 선이 함께 이동하면서 사용자의 시선이 분산되지 않고 한 곳에 집중되도록 유도합니다.</p>
+        <p class="desc desc-4">흔한 막대(bar) 형태의 스크롤 인디케이터 대신 게이지 형태의 스크롤 디자인을 사용했습니다.</p>
+        <p class="desc desc-5">스크롤에 따라 이미지가 축소·확대되며 시선의 전환을 자연스럽게 유도합니다.</p>
+      </div>
+    </section>
+
+    <!-- 2. 배운 것 카테고리 / 자기소개 / 코드 (카테고리 클릭하면 코드박스 내용이 대응해서 바뀜) -->
+    <section class="about-row">
+      <input type="radio" name="cat" id="cat-1" class="cat-radio" checked>
+      <input type="radio" name="cat" id="cat-2" class="cat-radio">
+      <input type="radio" name="cat" id="cat-3" class="cat-radio">
+      <input type="radio" name="cat" id="cat-4" class="cat-radio">
+
+      <div class="box category-box">
+        <h3>배운 것</h3>
+        <ul>
+          <li><label for="cat-1">인터렉션</label></li>
+          <li><label for="cat-2">리스팅 및 오거나이징</label></li>
+          <li><label for="cat-3">카테고리 placeholder 3</label></li>
+          <li><label for="cat-4">카테고리 placeholder 4</label></li>
+        </ul>
+      </div>
+
+      <div class="box intro-box">
+        <img class="intro-shot intro-shot-1" src="screenshot/group6.png" alt="자기소개 페이지 - 인터렉션 부분 강조">
+        <img class="intro-shot intro-shot-2" src="screenshot/group9.png" alt="자기소개 페이지 - 리스팅 및 오거나이징 부분">
+      </div>
+
+      <div class="box code-box">
+        <p class="code-snippet code-1">인터렉션 부분은 HTML만으로 클릭 등 사용자의 동작에 따라 웹페이지로 리다이렉팅하거나, 정보를 추가로 노출하거나, 제출 폼을 작성하는 정도를 간단히 구현해봤습니다. 다만 폼의 경우 구글 폼이 워낙 잘 만들어져 있어서, 추후 기능을 직접 구현할 때는 그만큼 정교하게 설계할 필요가 있어 보입니다.</p>
+        <p class="code-snippet code-2">리스팅은 정보를 단순히 나열하는 것이 아니라, 필요한 정보를 얼마나 노출하고 어떤 형태로 보여줄지에 따라 결과물이 꽤 달라진다는 것을 배웠습니다.</p>
+        <pre class="code-snippet code-3"><code>// 코드 placeholder 3
+function category3() {
+  return "world";
+}</code></pre>
+        <pre class="code-snippet code-4"><code>// 코드 placeholder 4
+function category4() {
+  return "world";
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- 3. 객관식 퀴즈 (문제 5개, 아무 선지나 누르면 정답 공개 후 다음 문제로 이동) -->
+    <section class="quiz">
+      <h3 class="quiz-title">간단한 퀴즈</h3>
+
+      <div class="quiz-flow">
+        <div class="q-block">
+          <div class="quiz-cards">
+            <div class="q-text-box">
+              <p class="q-text">Q1. HTML에서 &lt;h1&gt; 태그는 문서 내에서 가장 큰 제목을 나타낼 때 사용한다.</p>
+            </div>
+            <label class="quiz-card ox-card is-correct">
+              <input type="checkbox" class="quiz-check">
+              <span class="card-inner">
+                <span class="card-face front">O</span>
+                <span class="card-face back">정답</span>
+              </span>
+            </label>
+            <label class="quiz-card ox-card">
+              <input type="checkbox" class="quiz-check">
+              <span class="card-inner">
+                <span class="card-face front">X</span>
+                <span class="card-face back">오답</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="q-block">
+          <div class="quiz-cards">
+            <div class="q-text-box">
+              <p class="q-text">Q2. CSS에서 글자 색상을 변경할 때 사용하는 속성(Property)의 이름은 text-color이다.</p>
+            </div>
+            <label class="quiz-card ox-card">
+              <input type="checkbox" class="quiz-check">
+              <span class="card-inner">
+                <span class="card-face front">O</span>
+                <span class="card-face back">오답</span>
+              </span>
+            </label>
+            <label class="quiz-card ox-card is-correct">
+              <input type="checkbox" class="quiz-check">
+              <span class="card-inner">
+                <span class="card-face front">X</span>
+                <span class="card-face back">정답</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="q-block">
+          <div class="quiz-cards">
+            <div class="q-text-box">
+              <p class="q-text">Q3. HTML에서 줄바꿈을 할 때 사용하는 &lt;br&gt; 태그는 반드시 닫는 태그(&lt;/br&gt;)가 필요하다.</p>
+            </div>
+            <label class="quiz-card ox-card">
+              <input type="checkbox" class="quiz-check">
+              <span class="card-inner">
+                <span class="card-face front">O</span>
+                <span class="card-face back">오답</span>
+              </span>
+            </label>
+            <label class="quiz-card ox-card is-correct">
+              <input type="checkbox" class="quiz-check">
+              <span class="card-inner">
+                <span class="card-face front">X</span>
+                <span class="card-face back">정답</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="q-block">
+          <div class="quiz-cards">
+            <div class="q-text-box">
+              <p class="q-text">Q4. 하나의 HTML 요소(Element)에는 여러 개의 클래스(class)를 동시에 지정할 수 있다.</p>
+            </div>
+            <label class="quiz-card ox-card is-correct">
+              <input type="checkbox" class="quiz-check">
+              <span class="card-inner">
+                <span class="card-face front">O</span>
+                <span class="card-face back">정답</span>
+              </span>
+            </label>
+            <label class="quiz-card ox-card">
+              <input type="checkbox" class="quiz-check">
+              <span class="card-inner">
+                <span class="card-face front">X</span>
+                <span class="card-face back">오답</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="q-block">
+          <div class="quiz-cards">
+            <div class="q-text-box">
+              <p class="q-text">Q5. &lt;a&gt; 태그를 사용하여 다른 페이지로 이동하는 하이퍼링크를 만들 때, 연결할 웹 주소는 src 속성에 작성한다.</p>
+            </div>
+            <label class="quiz-card ox-card">
+              <input type="checkbox" class="quiz-check">
+              <span class="card-inner">
+                <span class="card-face front">O</span>
+                <span class="card-face back">오답</span>
+              </span>
+            </label>
+            <label class="quiz-card ox-card is-correct">
+              <input type="checkbox" class="quiz-check">
+              <span class="card-inner">
+                <span class="card-face front">X</span>
+                <span class="card-face back">정답</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="q-block q-done">
+          <p class="q-text">수고하셨습니다! 퀴즈 완료 🎉</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
