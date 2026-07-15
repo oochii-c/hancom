@@ -1,0 +1,337 @@
+/* ===== 파스텔 네온 다크 테마 ===== */
+:root {
+  --bg-0: #0f0f1e;
+  --bg-1: #1a1a2e;
+  --panel: rgba(30, 30, 54, 0.72);
+  --panel-line: rgba(255, 255, 255, 0.06);
+
+  --txt: #eaeaff;
+  --txt-dim: #8b8bb0;
+
+  /* 파스텔 네온 포인트 */
+  --mint: #7ef9d6;
+  --pink: #ff9ecd;
+  --lav: #b39dff;
+  --sky: #8fd4ff;
+
+  --key-bg: rgba(255, 255, 255, 0.04);
+  --key-bg-hover: rgba(255, 255, 255, 0.09);
+  --radius: 18px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  padding: 30px;
+  flex-wrap: wrap;
+  font-family: "Poppins", "Malgun Gothic", sans-serif;
+  color: var(--txt);
+  background:
+    radial-gradient(1200px 600px at 15% 0%, rgba(179, 157, 255, 0.15), transparent 60%),
+    radial-gradient(900px 600px at 100% 100%, rgba(126, 249, 214, 0.12), transparent 55%),
+    linear-gradient(160deg, var(--bg-1), var(--bg-0));
+}
+
+.app {
+  display: flex;
+  gap: 22px;
+  align-items: stretch;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ===== 히스토리 패널 ===== */
+.history {
+  width: 240px;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: 22px;
+  padding: 18px;
+  backdrop-filter: blur(14px);
+  display: flex;
+  flex-direction: column;
+}
+
+.history__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.history__head h2 {
+  font-family: "Orbitron", sans-serif;
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: var(--lav);
+  text-shadow: 0 0 12px rgba(179, 157, 255, 0.55);
+}
+
+.history__clear {
+  font-size: 12px;
+  color: var(--txt-dim);
+  background: transparent;
+  border: 1px solid var(--panel-line);
+  border-radius: 10px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: 0.18s;
+}
+.history__clear:hover {
+  color: var(--pink);
+  border-color: rgba(255, 158, 205, 0.5);
+}
+
+.history__list {
+  list-style: none;
+  overflow-y: auto;
+  flex: 1;
+  max-height: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.history__list li:not(.history__empty) {
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+  transition: 0.18s;
+}
+.history__list li:not(.history__empty):hover {
+  background: rgba(143, 212, 255, 0.1);
+}
+
+.history__expr {
+  display: block;
+  font-size: 12px;
+  color: var(--txt-dim);
+}
+.history__res {
+  display: block;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--mint);
+}
+
+.history__empty {
+  color: var(--txt-dim);
+  font-size: 13px;
+  text-align: center;
+  padding-top: 20px;
+}
+
+/* ===== 계산기 본체 ===== */
+.calc {
+  width: 320px;
+  background: var(--panel);
+  border: 1px solid var(--panel-line);
+  border-radius: 26px;
+  padding: 22px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+}
+
+.calc__display {
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid var(--panel-line);
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  text-align: right;
+  margin-bottom: 18px;
+  min-height: 104px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.calc__expression {
+  font-size: 15px;
+  color: var(--txt-dim);
+  min-height: 20px;
+  word-break: break-all;
+}
+
+.calc__result {
+  font-family: "Orbitron", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--mint);
+  text-shadow: 0 0 18px rgba(126, 249, 214, 0.5);
+  word-break: break-all;
+  line-height: 1.1;
+}
+
+.calc__keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.key {
+  border: 1px solid var(--panel-line);
+  background: var(--key-bg);
+  color: var(--txt);
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  height: 60px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform 0.08s ease, background 0.18s, box-shadow 0.18s;
+  user-select: none;
+}
+
+.key:hover {
+  background: var(--key-bg-hover);
+}
+.key:active {
+  transform: scale(0.94);
+}
+
+/* 눌림 하이라이트 (키보드 입력 시각 피드백) */
+.key.is-active {
+  transform: scale(0.94);
+  filter: brightness(1.35);
+}
+
+.key--fn {
+  color: var(--sky);
+}
+
+.key--op {
+  color: var(--pink);
+  font-size: 24px;
+  text-shadow: 0 0 12px rgba(255, 158, 205, 0.4);
+}
+.key--op.is-selected {
+  background: rgba(255, 158, 205, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(255, 158, 205, 0.6),
+    0 0 18px rgba(255, 158, 205, 0.35);
+}
+
+.key--eq {
+  color: var(--bg-0);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--mint), var(--sky));
+  border: none;
+  box-shadow: 0 0 22px rgba(126, 249, 214, 0.45);
+}
+.key--eq:hover {
+  filter: brightness(1.08);
+  background: linear-gradient(135deg, var(--mint), var(--sky));
+}
+
+/* 스크롤바 살짝 다듬기 */
+.history__list::-webkit-scrollbar {
+  width: 6px;
+}
+.history__list::-webkit-scrollbar-thumb {
+  background: rgba(179, 157, 255, 0.35);
+  border-radius: 6px;
+}
+
+/* ===== 🎉 코나미 코드 파티모드 ===== */
+body.party {
+  animation: partyHue 4s linear infinite;
+}
+@keyframes partyHue {
+  from { filter: hue-rotate(0deg); }
+  to   { filter: hue-rotate(360deg); }
+}
+
+/* 파티 중에는 계산기가 살짝 통통 튐 */
+body.party .calc {
+  animation: partyBounce 0.9s ease-in-out infinite;
+  box-shadow: 0 0 60px rgba(126, 249, 214, 0.55);
+}
+@keyframes partyBounce {
+  0%, 100% { transform: translateY(0) rotate(-0.4deg); }
+  50%      { transform: translateY(-8px) rotate(0.4deg); }
+}
+
+/* 결과 숫자 무지개 글로우 */
+body.party .calc__result {
+  animation: partyGlow 1.2s ease-in-out infinite alternate;
+}
+@keyframes partyGlow {
+  from { text-shadow: 0 0 18px var(--mint), 0 0 30px var(--pink); }
+  to   { text-shadow: 0 0 24px var(--lav), 0 0 40px var(--sky); }
+}
+
+/* 버튼들이 리듬 타듯 반짝 */
+body.party .key {
+  animation: partyKeys 1.4s ease-in-out infinite;
+}
+body.party .key:nth-child(3n) { animation-delay: 0.2s; }
+body.party .key:nth-child(3n+1) { animation-delay: 0.4s; }
+@keyframes partyKeys {
+  0%, 100% { box-shadow: none; }
+  50%      { box-shadow: 0 0 16px rgba(255, 158, 205, 0.6); }
+}
+
+/* 파티 토스트 배너 */
+.party-toast {
+  position: fixed;
+  top: 26px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-120px);
+  padding: 12px 26px;
+  border-radius: 999px;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #0f0f1e;
+  background: linear-gradient(90deg, var(--mint), var(--pink), var(--lav), var(--sky));
+  background-size: 300% 100%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  transition: transform 0.45s cubic-bezier(0.2, 1.4, 0.4, 1);
+  animation: toastSlide 3s linear infinite;
+}
+.party-toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+@keyframes toastSlide {
+  to { background-position: 300% 0; }
+}
+
+/* 떨어지는 색종이 조각 */
+.confetti {
+  position: fixed;
+  top: -20px;
+  width: 10px;
+  height: 14px;
+  border-radius: 2px;
+  z-index: 90;
+  pointer-events: none;
+  animation: confettiFall linear forwards;
+}
+@keyframes confettiFall {
+  to {
+    transform: translateY(105vh) rotate(720deg);
+    opacity: 0.2;
+  }
+}
+
+@media (max-width: 620px) {
+  .history {
+    width: 320px;
+    max-height: 180px;
+  }
+  .history__list {
+    max-height: 120px;
+  }
+}

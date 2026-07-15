@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="calculator" id="calculator">
+    <header class="calc-header">
+      <h1 class="calc-title">Calculator</h1>
+      <button
+        id="engToggle"
+        class="eng-toggle"
+        type="button"
+        aria-pressed="false"
+        title="공학용 계산기 켜기/끄기"
+      >
+        <span class="eng-toggle__label">ENG</span>
+        <span class="eng-toggle__switch" aria-hidden="true"></span>
+      </button>
+    </header>
+
+    <div class="display">
+      <div class="display__expression" id="expression">&nbsp;</div>
+      <div class="display__result" id="result">0</div>
+    </div>
+
+    <!-- 공학용 패널 (토글로 표시/숨김) -->
+    <div class="pad pad--eng" id="engPad" hidden>
+      <button class="btn btn--fn" data-const="pi">π</button>
+      <button class="btn btn--fn" data-const="e">e</button>
+      <button class="btn btn--fn" data-func="sqrt">√</button>
+      <button class="btn btn--fn" data-op="^">x^y</button>
+      <button class="btn btn--fn" data-func="fact">n!</button>
+
+      <button class="btn btn--fn" data-func="sin">sin</button>
+      <button class="btn btn--fn" data-func="cos">cos</button>
+      <button class="btn btn--fn" data-func="tan">tan</button>
+      <button class="btn btn--fn" data-func="ln">ln</button>
+      <button class="btn btn--fn" data-func="log">log</button>
+
+      <button class="btn btn--fn" data-paren="(">(</button>
+      <button class="btn btn--fn" data-paren=")">)</button>
+      <button class="btn btn--fn" data-func="inv">1/x</button>
+      <button class="btn btn--fn" data-func="square">x²</button>
+      <button class="btn btn--fn" data-func="pow10">10ˣ</button>
+
+      <button class="btn btn--fn" data-toggle-deg id="degRad">DEG</button>
+      <button class="btn btn--fn" data-func="abs">|x|</button>
+      <button class="btn btn--fn" data-func="exp">eˣ</button>
+      <button class="btn btn--fn" data-func="cbrt">∛</button>
+      <button class="btn btn--fn" data-const="rand">Rnd</button>
+    </div>
+
+    <!-- 기본 패널 -->
+    <div class="pad pad--basic">
+      <button class="btn btn--action" data-action="clear">AC</button>
+      <button class="btn btn--action" data-action="back">⌫</button>
+      <button class="btn btn--action" data-func="percent">%</button>
+      <button class="btn btn--op" data-op="/">÷</button>
+
+      <button class="btn" data-num="7">7</button>
+      <button class="btn" data-num="8">8</button>
+      <button class="btn" data-num="9">9</button>
+      <button class="btn btn--op" data-op="*">×</button>
+
+      <button class="btn" data-num="4">4</button>
+      <button class="btn" data-num="5">5</button>
+      <button class="btn" data-num="6">6</button>
+      <button class="btn btn--op" data-op="-">−</button>
+
+      <button class="btn" data-num="1">1</button>
+      <button class="btn" data-num="2">2</button>
+      <button class="btn" data-num="3">3</button>
+      <button class="btn btn--op" data-op="+">+</button>
+
+      <button class="btn" data-func="negate">±</button>
+      <button class="btn" data-num="0">0</button>
+      <button class="btn" data-num=".">.</button>
+      <button class="btn btn--equals" data-action="equals">=</button>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

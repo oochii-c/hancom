@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>계산기 · 숫자, 뚝딱!</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+<style>
+  /* ── 배민 2.0 토큰 (Claude_design.md 그대로) ─────────────────────── */
+  :root {
+    --mint:        oklch(0.88 0.18 178);
+    --mint-hover:  oklch(0.69 0.13 184);
+    --mint-tint:   oklch(0.97 0.05 178);
+    --mint-700:    oklch(0.55 0.10 188);
+    --navy:        oklch(0.30 0.13 286);
+    --red:         oklch(0.63 0.24 27);
+
+    --bg-page:     oklch(0.97 0.00 286);
+    --bg-surface:  oklch(1.00 0 0);
+    --bg-subtle:   oklch(0.96 0.00 286);
+    --bg-pressed:  oklch(0.94 0.00 286);
+    --bg-inverse:  oklch(0.18 0 0);
+
+    --fg-1:        oklch(0.18 0 0);
+    --fg-2:        oklch(0.34 0 0);
+    --fg-3:        oklch(0.55 0 0);
+
+    --border-1:    oklch(0.94 0.00 286);
+    --border-2:    oklch(0.87 0.00 286);
+
+    --font-display: "Do Hyeon", "Malgun Gothic", sans-serif;   /* BM 도현체 대체 */
+    --font-body:    "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo",
+                    "Noto Sans KR", "Malgun Gothic", Roboto, sans-serif;
+
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --dur-fast: 120ms;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg-page);
+    color: var(--fg-1);
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .app { width: 100%; max-width: 360px; }
+
+  /* ── 워드마크 (도현체 간판) ─────────────────────────────────────── */
+  .brand {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding-left: 4px;
+    margin-bottom: 20px;
+  }
+  .brand-title {
+    font-family: var(--font-display);
+    font-size: 30px;
+    letter-spacing: -0.02em;
+    color: var(--fg-1);
+  }
+  .brand-sub {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--mint-700);
+    letter-spacing: -0.01em;
+  }
+
+  /* ── display = 검정 간판 + 6px 스티커 그림자 (시그니처) ──────────── */
+  .display {
+    background: var(--bg-inverse);
+    border-radius: 20px;
+    padding: 22px 22px 20px;
+    margin-bottom: 22px;
+    box-shadow: 0 6px 0 var(--fg-1);   /* shadow-sticker */
+    overflow: hidden;
+  }
+  .display-expr {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--mint);
+    text-align: right;
+    min-height: 20px;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-variant-numeric: tabular-nums;
+  }
+  .display-main {
+    font-family: var(--font-display);
+    color: var(--bg-surface);
+    text-align: right;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+    margin-top: 6px;
+    word-break: break-all;
+  }
+  .display-main.is-error {
+    font-family: var(--font-body);
+    font-weight: 800;
+    color: var(--mint);
+  }
+
+  /* ── 키패드 ─────────────────────────────────────────────────────── */
+  .keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 11px;
+  }
+
+  .key {
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-weight: 800;
+    font-size: 24px;
+    letter-spacing: -0.01em;
+    height: 64px;
+    border-radius: 18px;
+    color: var(--fg-1);
+    background: var(--bg-surface);
+    box-shadow: 0 4px 0 var(--border-2);   /* 스티커 물성 */
+    transition: transform var(--dur-fast) var(--ease-out),
+                box-shadow var(--dur-fast) var(--ease-out),
+                background var(--dur-fast) var(--ease-out);
+    user-select: none;
+    touch-action: manipulation;
+  }
+  .key:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 var(--border-2);
+  }
+  .key:focus-visible {
+    outline: 3px solid var(--navy);
+    outline-offset: 3px;
+  }
+
+  /* 숫자/소수점 — 흰 스티커 */
+  .key.num { font-size: 26px; }
+
+  /* 기능키 (C ± %) — 옅은 회색 */
+  .key.fn {
+    background: var(--bg-subtle);
+    color: var(--fg-2);
+    font-size: 20px;
+    box-shadow: 0 4px 0 var(--border-2);
+  }
+  .key.fn.clear { color: var(--red); }     /* 전체지우기 = 배민 red 액센트 */
+
+  /* 연산자 (÷ × − +) — 민트 */
+  .key.op {
+    background: var(--mint);
+    color: var(--fg-1);
+    font-size: 27px;
+    box-shadow: 0 4px 0 var(--mint-hover);
+  }
+  .key.op:active { box-shadow: 0 0 0 var(--mint-hover); }
+  .key.op.selected {                        /* 현재 선택된 연산자 반전 */
+    background: var(--fg-1);
+    color: var(--mint);
+  }
+
+  /* 등호 — 검정 페이오프 키 (진짜 스티커 그림자) */
+  .key.equals {
+    background: var(--fg-1);
+    color: var(--bg-surface);
+    font-size: 30px;
+    box-shadow: 0 4px 0 oklch(0.30 0 0);
+  }
+  .key.equals:active { box-shadow: 0 0 0 oklch(0.30 0 0); }
+
+  .key.wide { grid-column: span 2; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .key { transition: none; }
+    .key:active { transform: none; }
+  }
+
+  @media (max-width: 360px) {
+    .key { height: 58px; font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+  <main class="app">
+    <header class="brand">
+      <span class="brand-title">계산기</span>
+      <span class="brand-sub">숫자, 뚝딱!</span>
+    </header>
+
+    <section class="display" aria-live="polite">
+      <div class="display-expr" id="expr"></div>
+      <div class="display-main" id="main" style="font-size:52px">0</div>
+    </section>
+
+    <div class="keys">
+      <button class="key fn clear" data-action="clear">C</button>
+      <button class="key fn" data-action="negate">±</button>
+      <button class="key fn" data-action="percent">%</button>
+      <button class="key op" data-op="÷">÷</button>
+
+      <button class="key num" data-digit="7">7</button>
+      <button class="key num" data-digit="8">8</button>
+      <button class="key num" data-digit="9">9</button>
+      <button class="key op" data-op="×">×</button>
+
+      <button class="key num" data-digit="4">4</button>
+      <button class="key num" data-digit="5">5</button>
+      <button class="key num" data-digit="6">6</button>
+      <button class="key op" data-op="−">−</button>
+
+      <button class="key num" data-digit="1">1</button>
+      <button class="key num" data-digit="2">2</button>
+      <button class="key num" data-digit="3">3</button>
+      <button class="key op" data-op="+">+</button>
+
+      <button class="key num wide" data-digit="0">0</button>
+      <button class="key num" data-action="dot">.</button>
+      <button class="key equals" data-action="equals">=</button>
+    </div>
+  </main>
+
+<script>
+(function () {
+  const mainEl = document.getElementById("main");
+  const exprEl = document.getElementById("expr");
+
+  let current  = "0";      // 화면에 찍히는 현재 피연산자 (문자열)
+  let previous = null;     // 이전 피연산자
+  let op       = null;     // 대기 중인 연산자 (÷ × − +)
+  let overwrite = false;   // 다음 숫자 입력이 화면을 덮어쓸지
+  let errored  = false;
+
+  const OPS = {
+    "÷": (a, b) => a / b,
+    "×": (a, b) => a * b,
+    "−": (a, b) => a - b,
+    "+": (a, b) => a + b,
+  };
+
+  // 숫자를 천 단위 콤마로 (입력 중 소수점/음수 유지)
+  function format(str) {
+    if (str === "" || str === "-") return "0";
+    const neg = str.startsWith("-");
+    let body = neg ? str.slice(1) : str;
+    const hasDot = body.includes(".");
+    let [intPart, decPart = ""] = body.split(".");
+    intPart = (intPart || "0").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    let out = intPart + (hasDot ? "." + decPart : "");
+    return (neg ? "-" : "") + out;
+  }
+
+  // 부동소수 지저분함 정리
+  function tidy(n) {
+    if (!isFinite(n)) return n;
+    return parseFloat(n.toPrecision(12)).toString();
+  }
+
+  function render() {
+    if (errored) return;
+    const shown = format(current);
+    mainEl.textContent = shown;
+    mainEl.classList.remove("is-error");
+    // 길이에 따라 폰트 자동 축소
+    const len = shown.replace(/[,.\-]/g, "").length;
+    let size = 52;
+    if (len > 6)  size = 44;
+    if (len > 8)  size = 36;
+    if (len > 10) size = 30;
+    if (len > 13) size = 24;
+    mainEl.style.fontSize = size + "px";
+  }
+
+  function renderExpr() {
+    exprEl.textContent = (previous !== null && op)
+      ? format(previous) + " " + op
+      : "";
+  }
+
+  function setSelectedOp() {
+    document.querySelectorAll(".key.op").forEach((b) => {
+      b.classList.toggle("selected", overwrite && op !== null && b.dataset.op === op);
+    });
+  }
+
+  function showError(msg) {
+    errored = true;
+    mainEl.classList.add("is-error");
+    mainEl.style.fontSize = "22px";
+    mainEl.textContent = msg;
+    exprEl.textContent = "";
+    setSelectedOp();
+  }
+
+  function inputDigit(d) {
+    if (errored) clearAll();
+    if (overwrite) { current = d; overwrite = false; }
+    else if (current === "0") current = d;
+    else if (current.replace(/[-.]/g, "").length < 14) current += d;
+    setSelectedOp();
+    render();
+  }
+
+  function inputDot() {
+    if (errored) clearAll();
+    if (overwrite) { current = "0."; overwrite = false; setSelectedOp(); render(); return; }
+    if (!current.includes(".")) current += ".";
+    render();
+  }
+
+  function chooseOp(nextOp) {
+    if (errored) return;
+    if (op !== null && !overwrite) compute();      // 연산자 체이닝
+    else if (previous === null) previous = current;
+    op = nextOp;
+    overwrite = true;
+    renderExpr();
+    setSelectedOp();
+  }
+
+  function compute() {
+    if (op === null || previous === null) return;
+    const a = parseFloat(previous);
+    const b = parseFloat(current);
+    if (op === "÷" && b === 0) { showError("0으로는 못 나눠요"); previous = null; op = null; return; }
+    const r = OPS[op](a, b);
+    if (!isFinite(r)) { showError("계산할 수 없어요"); previous = null; op = null; return; }
+    current = tidy(r);
+    previous = current;
+  }
+
+  function equals() {
+    if (errored || op === null || previous === null) return;
+    exprEl.textContent = format(previous) + " " + op + " " + format(current) + " =";
+    compute();
+    if (errored) return;
+    previous = null;
+    op = null;
+    overwrite = true;
+    setSelectedOp();
+    render();
+  }
+
+  function negate() {
+    if (errored) return;
+    if (current === "0") return;
+    current = current.startsWith("-") ? current.slice(1) : "-" + current;
+    render();
+  }
+
+  function percent() {
+    if (errored) return;
+    current = tidy(parseFloat(current) / 100);
+    overwrite = false;
+    render();
+  }
+
+  function clearAll() {
+    current = "0"; previous = null; op = null; overwrite = false; errored = false;
+    mainEl.classList.remove("is-error");
+    renderExpr();
+    setSelectedOp();
+    render();
+  }
+
+  // ── 클릭 ────────────────────────────────────────────────
+  document.querySelector(".keys").addEventListener("click", (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+    if (btn.dataset.digit) return inputDigit(btn.dataset.digit);
+    if (btn.dataset.op)    return chooseOp(btn.dataset.op);
+    switch (btn.dataset.action) {
+      case "dot":     return inputDot();
+      case "equals":  return equals();
+      case "clear":   return clearAll();
+      case "negate":  return negate();
+      case "percent": return percent();
+    }
+  });
+
+  // ── 키보드 ──────────────────────────────────────────────
+  const KEYMAP = { "/": "÷", "*": "×", "-": "−", "+": "+" };
+  window.addEventListener("keydown", (e) => {
+    if (e.key >= "0" && e.key <= "9") { inputDigit(e.key); flash(`[data-digit="${e.key}"]`); return; }
+    if (e.key === ".") { inputDot(); flash('[data-action="dot"]'); return; }
+    if (KEYMAP[e.key]) { chooseOp(KEYMAP[e.key]); flash(`[data-op="${KEYMAP[e.key]}"]`); return; }
+    if (e.key === "Enter" || e.key === "=") { e.preventDefault(); equals(); flash('[data-action="equals"]'); return; }
+    if (e.key === "Escape") { clearAll(); flash('[data-action="clear"]'); return; }
+    if (e.key === "%") { percent(); flash('[data-action="percent"]'); return; }
+    if (e.key === "Backspace") {
+      if (errored) return clearAll();
+      if (overwrite) return;
+      current = current.length <= 1 || (current.length === 2 && current.startsWith("-")) ? "0" : current.slice(0, -1);
+      render();
+    }
+  });
+
+  // 키보드 입력 시 버튼 살짝 눌린 느낌
+  function flash(sel) {
+    const el = document.querySelector(sel);
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    el.style.transform = "translateY(4px)";
+    el.style.boxShadow = "0 0 0 transparent";
+    setTimeout(() => { el.style.transform = ""; el.style.boxShadow = ""; }, 90);
+  }
+
+  clearAll();
+})();
+</script>
+</body>
+</html>

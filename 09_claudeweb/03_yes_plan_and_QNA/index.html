@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neon 계산기</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <!-- 히스토리 패널 -->
+    <section class="history" aria-label="계산 기록">
+      <div class="history__head">
+        <h2>History</h2>
+        <button id="clearHistory" class="history__clear" type="button" title="기록 지우기">지우기</button>
+      </div>
+      <ul id="historyList" class="history__list">
+        <li class="history__empty">아직 계산 기록이 없어요</li>
+      </ul>
+    </section>
+
+    <!-- 계산기 본체 -->
+    <section class="calc" aria-label="계산기">
+      <div class="calc__display">
+        <div id="expression" class="calc__expression">&nbsp;</div>
+        <div id="result" class="calc__result">0</div>
+      </div>
+
+      <div class="calc__keys">
+        <button class="key key--fn" data-action="clear">AC</button>
+        <button class="key key--fn" data-action="backspace" title="한 글자 지우기">⌫</button>
+        <button class="key key--fn" data-action="percent">%</button>
+        <button class="key key--op" data-op="/">÷</button>
+
+        <button class="key" data-num="7">7</button>
+        <button class="key" data-num="8">8</button>
+        <button class="key" data-num="9">9</button>
+        <button class="key key--op" data-op="*">×</button>
+
+        <button class="key" data-num="4">4</button>
+        <button class="key" data-num="5">5</button>
+        <button class="key" data-num="6">6</button>
+        <button class="key key--op" data-op="-">−</button>
+
+        <button class="key" data-num="1">1</button>
+        <button class="key" data-num="2">2</button>
+        <button class="key" data-num="3">3</button>
+        <button class="key key--op" data-op="+">+</button>
+
+        <button class="key key--fn" data-action="negate" title="부호 변경">±</button>
+        <button class="key" data-num="0">0</button>
+        <button class="key" data-action="decimal">.</button>
+        <button class="key key--eq" data-action="equals">=</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

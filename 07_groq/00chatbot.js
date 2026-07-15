@@ -14,7 +14,7 @@ app.post('/api/chat', async (req, res) => {
     const groqRes = await fetch('http://api.groq.com/openai/v1/chat/completions',
         {
             method: 'POST',
-            headers: { 'Content'}
+            headers: { 'Content':}
         }
     )
 })

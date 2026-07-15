@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Calculator — Figma DESIGN.md</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,320;14..32,330;14..32,340;14..32,480;14..32,540;14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  /* ---- Tokens (from figma DESIGN.md front matter) ---- */
+  :root {
+    --primary:#000000;      --on-primary:#ffffff;
+    --ink:#000000;          --canvas:#ffffff;
+    --hairline:#e6e6e6;     --hairline-soft:#f1f1f1;
+    --surface-soft:#f7f7f5;
+    --block-lime:#dceeb1;   --block-lilac:#c5b0f4;
+    --block-cream:#f4ecd6;  --block-pink:#efd4d4;
+    --block-mint:#c8e6cd;   --block-coral:#f3c9b6;
+    --block-navy:#1f1d3d;   --accent-magenta:#ff3d8b;
+
+    --r-md:8px; --r-lg:24px; --r-xl:32px; --r-pill:50px; --r-full:9999px;
+    --s-xs:8px; --s-sm:12px; --s-md:16px; --s-lg:24px; --s-xl:32px; --s-xxl:48px;
+
+    --sans:"Inter","SF Pro Display",system-ui,helvetica,sans-serif;
+    --mono:"JetBrains Mono","SF Mono",menlo,monospace;
+  }
+
+  * { box-sizing:border-box; margin:0; padding:0; }
+
+  body {
+    min-height:100dvh;
+    background:var(--canvas);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-feature-settings:"kern" 1;
+    -webkit-font-smoothing:antialiased;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:var(--s-xl);
+  }
+
+  /* ---- eyebrow / caption : figmaMono, uppercase, positive tracking ---- */
+  .eyebrow {
+    font-family:var(--mono);
+    font-size:18px; font-weight:400;
+    letter-spacing:0.54px; text-transform:uppercase;
+    line-height:1.3;
+  }
+  .caption {
+    font-family:var(--mono);
+    font-size:12px; font-weight:400;
+    letter-spacing:0.6px; text-transform:uppercase;
+    line-height:1;
+    color:var(--ink);
+  }
+
+  .stage { width:100%; max-width:420px; }
+
+  .stage__head {
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:var(--s-lg);
+  }
+  .stage__head .dot {
+    width:10px; height:10px; border-radius:var(--r-full);
+    background:var(--accent-magenta); display:inline-block;
+    margin-right:var(--s-xs);
+  }
+
+  /* ---- calculator card : white canvas, hairline border, rounded.xl, no shadow ---- */
+  .calc {
+    background:var(--canvas);
+    border:1px solid var(--hairline);
+    border-radius:var(--r-xl);
+    padding:var(--s-lg);
+  }
+
+  /* ---- display : expression (mono, quiet) + result (display type, tight tracking) ---- */
+  .display {
+    background:var(--surface-soft);
+    border-radius:var(--r-lg);
+    padding:var(--s-lg) var(--s-lg) var(--s-md);
+    margin-bottom:var(--s-md);
+    text-align:right;
+    overflow:hidden;
+  }
+  .display__expr {
+    font-family:var(--mono);
+    font-size:14px; font-weight:400; letter-spacing:0.4px;
+    line-height:1;
+    color:var(--ink);
+    opacity:.55;
+    min-height:16px;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    direction:rtl;
+  }
+  .display__result {
+    font-family:var(--sans);
+    font-weight:340;
+    font-size:64px; line-height:1.05; letter-spacing:-0.96px;
+    font-variant-numeric:tabular-nums;
+    margin-top:8px;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+
+  /* ---- keypad ---- */
+  .keys {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:var(--s-sm);
+  }
+
+  .key {
+    -webkit-appearance:none; appearance:none;
+    border:none; cursor:pointer;
+    aspect-ratio:1/1;
+    border-radius:var(--r-full);          /* every button is a pill/circle */
+    font-family:var(--sans);
+    font-size:24px; font-weight:480; letter-spacing:-0.1px;
+    color:var(--ink);
+    background:var(--surface-soft);       /* digits: soft off-white */
+    display:flex; align-items:center; justify-content:center;
+    transition:transform .06s ease, filter .15s ease;
+    user-select:none;
+  }
+  .key:active { transform:scale(.94); }
+  .key:focus-visible { outline:2px solid var(--primary); outline-offset:2px; }
+
+  /* function keys (AC, +/-, %) -> coral block */
+  .key--fn      { background:var(--block-coral); }
+  /* operators (÷ × − +) -> lilac block */
+  .key--op      { background:var(--block-lilac); font-weight:540; }
+  .key--op.is-active { background:var(--primary); color:var(--on-primary); }
+  /* equals = genuine primary CTA -> black pill */
+  .key--equals  { background:var(--primary); color:var(--on-primary); }
+  /* wide zero -> pill, spans two columns */
+  .key--zero {
+    grid-column:span 2;
+    aspect-ratio:auto;
+    border-radius:var(--r-pill);
+    justify-content:flex-start;
+    padding-left:26px;
+  }
+
+  .stage__foot {
+    margin-top:var(--s-md);
+    display:flex; justify-content:space-between; align-items:center;
+    opacity:.6;
+  }
+
+  @media (max-width:560px){
+    body { padding:var(--s-md); align-items:flex-start; padding-top:var(--s-xl); }
+    .display__result { font-size:48px; letter-spacing:-0.72px; }
+    .key { font-size:22px; }
+  }
+</style>
+</head>
+<body>
+  <main class="stage">
+    <header class="stage__head">
+      <span class="eyebrow"><span class="dot"></span>Calculator</span>
+      <span class="caption">figma / design.md</span>
+    </header>
+
+    <section class="calc" aria-label="calculator">
+      <div class="display">
+        <div class="display__expr" id="expr" aria-hidden="true">&nbsp;</div>
+        <div class="display__result" id="result" role="status" aria-live="polite">0</div>
+      </div>
+
+      <div class="keys" id="keys">
+        <button class="key key--fn"     data-action="clear"    aria-label="clear">AC</button>
+        <button class="key key--fn"     data-action="negate"   aria-label="plus minus">±</button>
+        <button class="key key--fn"     data-action="percent"  aria-label="percent">%</button>
+        <button class="key key--op"     data-op="/"            aria-label="divide">÷</button>
+
+        <button class="key" data-digit="7">7</button>
+        <button class="key" data-digit="8">8</button>
+        <button class="key" data-digit="9">9</button>
+        <button class="key key--op"     data-op="*"            aria-label="multiply">×</button>
+
+        <button class="key" data-digit="4">4</button>
+        <button class="key" data-digit="5">5</button>
+        <button class="key" data-digit="6">6</button>
+        <button class="key key--op"     data-op="-"            aria-label="subtract">−</button>
+
+        <button class="key" data-digit="1">1</button>
+        <button class="key" data-digit="2">2</button>
+        <button class="key" data-digit="3">3</button>
+        <button class="key key--op"     data-op="+"            aria-label="add">+</button>
+
+        <button class="key key--zero" data-digit="0">0</button>
+        <button class="key" data-action="decimal">.</button>
+        <button class="key key--equals" data-action="equals" aria-label="equals">=</button>
+      </div>
+    </section>
+
+    <footer class="stage__foot">
+      <span class="caption">weight, not opacity, carries hierarchy</span>
+      <span class="caption" id="mode">keyboard ready</span>
+    </footer>
+  </main>
+
+<script>
+(function () {
+  "use strict";
+
+  const resultEl = document.getElementById("result");
+  const exprEl   = document.getElementById("expr");
+  const keysEl   = document.getElementById("keys");
+
+  const OP_SYMBOL = { "+":"+", "-":"−", "*":"×", "/":"÷" };
+
+  const state = {
+    current: "0",     // string shown / being typed
+    previous: null,   // number stored before an operator
+    operator: null,   // pending operator
+    overwrite: true,  // next digit replaces the display
+  };
+
+  /* ---- number formatting: group integers, keep sane precision, no gray text ---- */
+  function format(numStr) {
+    if (numStr === "Error") return numStr;
+    if (numStr.endsWith(".")) {
+      const head = numStr.slice(0, -1);
+      return groupInt(head) + ".";
+    }
+    const n = Number(numStr);
+    if (!isFinite(n)) return "Error";
+    if (Number.isInteger(n) && Math.abs(n) < 1e15) return groupInt(numStr);
+    // limit float length, then trim trailing zeros
+    let s = n.toPrecision(12);
+    if (s.indexOf("e") === -1) s = String(parseFloat(s));
+    const [int, dec] = s.split(".");
+    return dec ? groupInt(int) + "." + dec : groupInt(int);
+  }
+  function groupInt(s) {
+    const neg = s.startsWith("-");
+    if (neg) s = s.slice(1);
+    s = s.replace(/^0+(?=\d)/, "");
+    return (neg ? "-" : "") + s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function render() {
+    resultEl.textContent = format(state.current);
+    if (state.operator && state.previous !== null) {
+      exprEl.textContent = format(String(state.previous)) + " " + OP_SYMBOL[state.operator];
+    } else {
+      exprEl.innerHTML = "&nbsp;";
+    }
+    // auto-fit long results
+    const len = resultEl.textContent.length;
+    resultEl.style.fontSize = len > 9 ? Math.max(28, 64 - (len - 9) * 3.4) + "px" : "";
+  }
+
+  function inputDigit(d) {
+    if (state.current === "Error") clearAll();
+    if (state.overwrite) {
+      state.current = d;
+      state.overwrite = false;
+    } else {
+      if (state.current === "0") state.current = d;
+      else if (state.current.replace(/[-.]/g, "").length < 15) state.current += d;
+    }
+    render();
+  }
+
+  function inputDecimal() {
+    if (state.current === "Error") clearAll();
+    if (state.overwrite) { state.current = "0."; state.overwrite = false; return render(); }
+    if (!state.current.includes(".")) state.current += ".";
+    render();
+  }
+
+  function negate() {
+    if (state.current === "0" || state.current === "Error") return;
+    state.current = state.current.startsWith("-")
+      ? state.current.slice(1)
+      : "-" + state.current;
+    render();
+  }
+
+  function percent() {
+    if (state.current === "Error") return;
+    state.current = String(Number(state.current) / 100);
+    state.overwrite = true;
+    render();
+  }
+
+  function compute(a, b, op) {
+    switch (op) {
+      case "+": return a + b;
+      case "-": return a - b;
+      case "*": return a * b;
+      case "/": return b === 0 ? NaN : a / b;
+    }
+    return b;
+  }
+
+  function chooseOperator(op) {
+    if (state.current === "Error") return;
+    const inputVal = Number(state.current);
+
+    if (state.operator && !state.overwrite) {
+      // finish the pending operation first (chained input)
+      const out = compute(state.previous, inputVal, state.operator);
+      if (!isFinite(out)) return fail();
+      state.previous = out;
+      state.current = String(out);
+    } else if (state.previous === null) {
+      state.previous = inputVal;
+    }
+    state.operator = op;
+    state.overwrite = true;
+
+    // highlight the active operator pill
+    setActiveOp(op);
+    render();
+  }
+
+  function equals() {
+    if (state.operator === null || state.previous === null) return;
+    if (state.current === "Error") return;
+    const out = compute(state.previous, Number(state.current), state.operator);
+    if (!isFinite(out)) return fail();
+    state.current = String(out);
+    state.previous = null;
+    state.operator = null;
+    state.overwrite = true;
+    setActiveOp(null);
+    render();
+  }
+
+  function fail() {
+    state.current = "Error";
+    state.previous = null;
+    state.operator = null;
+    state.overwrite = true;
+    setActiveOp(null);
+    render();
+  }
+
+  function clearAll() {
+    state.current = "0";
+    state.previous = null;
+    state.operator = null;
+    state.overwrite = true;
+    setActiveOp(null);
+    render();
+  }
+
+  function setActiveOp(op) {
+    keysEl.querySelectorAll(".key--op").forEach(function (b) {
+      b.classList.toggle("is-active", op !== null && b.dataset.op === op);
+    });
+  }
+
+  /* ---- events ---- */
+  keysEl.addEventListener("click", function (e) {
+    const btn = e.target.closest(".key");
+    if (!btn) return;
+    if (btn.dataset.digit !== undefined) return inputDigit(btn.dataset.digit);
+    if (btn.dataset.op !== undefined)    return chooseOperator(btn.dataset.op);
+    switch (btn.dataset.action) {
+      case "decimal": return inputDecimal();
+      case "negate":  return negate();
+      case "percent": return percent();
+      case "clear":   return clearAll();
+      case "equals":  return equals();
+    }
+  });
+
+  const KEY_OP = { "+":"+", "-":"-", "*":"*", "x":"*", "X":"*", "/":"/" };
+  window.addEventListener("keydown", function (e) {
+    if (e.key >= "0" && e.key <= "9") { inputDigit(e.key); flash("[data-digit='" + e.key + "']"); return; }
+    if (KEY_OP[e.key]) { chooseOperator(KEY_OP[e.key]); return; }
+    if (e.key === "." || e.key === ",") { inputDecimal(); return; }
+    if (e.key === "Enter" || e.key === "=") { e.preventDefault(); equals(); return; }
+    if (e.key === "%") { percent(); return; }
+    if (e.key === "Escape") { clearAll(); return; }
+    if (e.key === "Backspace") {
+      if (state.overwrite || state.current === "Error") return;
+      state.current = state.current.length > 1 ? state.current.slice(0, -1) : "0";
+      if (state.current === "-") state.current = "0";
+      render();
+    }
+  });
+
+  function flash(sel) {
+    const el = keysEl.querySelector(sel);
+    if (!el) return;
+    el.style.filter = "brightness(.92)";
+    setTimeout(function () { el.style.filter = ""; }, 90);
+  }
+
+  clearAll();
+})();
+</script>
+</body>
+</html>

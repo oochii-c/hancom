@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>가산기 707 · 종이 테이프 계산기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@400;500;700&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --enamel:      #23403A;
+    --enamel-lite: #2C4E46;
+    --enamel-dark: #17302A;
+    --slot:        #0E1F1B;
+    --key:         #E9E2D0;
+    --key-shad:    #C4BBA3;
+    --ink:         #211E1A;
+    --red:         #C0392B;
+    --brass:       #C6903F;
+    --brass-lite:  #E0B36A;
+    --paper:       #ECE3D0;
+    --paper-line:  #D8CDB4;
+    --desk:        #101A17;
+    --desk-2:      #0A110F;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    min-height: 100vh;
+    font-family: "IBM Plex Sans KR", system-ui, sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(120% 90% at 50% -10%, #16241F 0%, var(--desk) 42%, var(--desk-2) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 26px;
+    padding: 40px 18px 64px;
+  }
+
+  /* ---- masthead ---------------------------------------------------------- */
+  .masthead {
+    text-align: center;
+    color: #C9D6CE;
+    max-width: 640px;
+  }
+  .masthead .kicker {
+    font-family: "Martian Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--brass-lite);
+    margin-bottom: 10px;
+  }
+  .masthead h1 {
+    font-family: "Martian Mono", monospace;
+    font-weight: 700;
+    font-size: clamp(22px, 5vw, 32px);
+    letter-spacing: -0.01em;
+    color: #EFE7D5;
+  }
+  .masthead p {
+    margin-top: 10px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #8DA097;
+  }
+
+  /* ---- the machine ------------------------------------------------------- */
+  .machine {
+    display: grid;
+    grid-template-columns: minmax(300px, 360px) 208px;
+    gap: 0;
+    filter: drop-shadow(0 40px 60px rgba(0,0,0,0.55));
+  }
+
+  .body {
+    background:
+      linear-gradient(180deg, var(--enamel-lite) 0%, var(--enamel) 34%, var(--enamel-dark) 100%);
+    border-radius: 22px 8px 8px 22px;
+    padding: 22px 22px 26px;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.14),
+      inset 0 -18px 30px rgba(0,0,0,0.32);
+    position: relative;
+    z-index: 2;
+  }
+
+  .plate {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding: 0 2px;
+  }
+  .wordmark {
+    font-family: "Martian Mono", monospace;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: var(--brass-lite);
+  }
+  .wordmark span { color: #9FB2A9; font-weight: 500; }
+  .vents { display: flex; gap: 5px; }
+  .vents i {
+    width: 4px; height: 22px; border-radius: 2px;
+    background: linear-gradient(180deg, var(--enamel-dark), #0c1c18);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+
+  /* readout window — paper-like, not an LCD */
+  .readout {
+    background:
+      linear-gradient(180deg, #F6F0E1, var(--paper));
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    box-shadow:
+      inset 0 2px 6px rgba(0,0,0,0.28),
+      inset 0 -1px 0 rgba(255,255,255,0.6),
+      0 1px 0 rgba(255,255,255,0.08);
+    min-height: 66px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .readout .op-hint {
+    font-family: "Martian Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: #9C8F72;
+    height: 14px;
+    text-align: right;
+  }
+  .readout .value {
+    font-family: "Martian Mono", monospace;
+    font-weight: 500;
+    font-size: clamp(26px, 7vw, 34px);
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-align: right;
+    line-height: 1.05;
+    word-break: break-all;
+  }
+  .readout.error .value { color: var(--red); font-size: 20px; }
+
+  /* keypad */
+  .keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .key {
+    font-family: "Martian Mono", monospace;
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--ink);
+    background: linear-gradient(180deg, #F4EEDE 0%, var(--key) 60%, #DED4BC 100%);
+    border: none;
+    border-radius: 9px;
+    padding: 16px 0;
+    cursor: pointer;
+    box-shadow:
+      0 4px 0 var(--key-shad),
+      0 5px 8px rgba(0,0,0,0.28),
+      inset 0 1px 0 rgba(255,255,255,0.7);
+    transition: transform .05s ease, box-shadow .05s ease, background .12s ease, border-radius .4s cubic-bezier(.34,1.56,.64,1), aspect-ratio .4s ease;
+    -webkit-user-select: none; user-select: none;
+  }
+  .key:active,
+  .key.press {
+    transform: translateY(3px);
+    box-shadow:
+      0 1px 0 var(--key-shad),
+      0 1px 3px rgba(0,0,0,0.3),
+      inset 0 1px 0 rgba(255,255,255,0.5);
+  }
+  .key:focus-visible {
+    outline: 2.5px solid var(--brass-lite);
+    outline-offset: 2px;
+  }
+
+  .key.op { color: var(--enamel); font-weight: 700; }
+  .key.util {
+    font-size: 14px;
+    background: linear-gradient(180deg, #3B554E, var(--enamel));
+    color: #D9E2DC;
+    box-shadow:
+      0 4px 0 #14282300,
+      0 4px 0 #142823,
+      0 5px 8px rgba(0,0,0,0.3),
+      inset 0 1px 0 rgba(255,255,255,0.12);
+  }
+  .key.util:active, .key.util.press {
+    box-shadow: 0 1px 0 #142823, inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+  .key.equals {
+    grid-row: span 2;
+    background: linear-gradient(180deg, var(--brass-lite) 0%, var(--brass) 62%, #A6742C 100%);
+    color: #2A1D08;
+    font-weight: 700;
+    box-shadow:
+      0 4px 0 #8A611F,
+      0 5px 9px rgba(0,0,0,0.34),
+      inset 0 1px 0 rgba(255,255,255,0.55);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .key.equals:active, .key.equals.press {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 #8A611F, inset 0 1px 0 rgba(255,255,255,0.4);
+  }
+  .key.zero { grid-column: span 2; }
+
+  /* ---- paper tape (the signature) --------------------------------------- */
+  .tape-unit {
+    position: relative;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    margin-left: -6px;
+  }
+  /* the machine's roller housing the tape feeds through */
+  .roller {
+    height: 30px;
+    background:
+      linear-gradient(180deg, var(--enamel-lite), var(--enamel-dark));
+    border-radius: 0 12px 0 0;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-left: none;
+    position: relative;
+    box-shadow: inset 0 -6px 10px rgba(0,0,0,0.3);
+  }
+  .roller::after {
+    content: "";
+    position: absolute;
+    left: 14px; right: 14px; bottom: 4px; height: 8px;
+    background: var(--slot);
+    border-radius: 5px;
+    box-shadow: inset 0 2px 3px rgba(0,0,0,0.7), 0 1px 0 rgba(255,255,255,0.06);
+  }
+
+  .tape-window {
+    flex: 1;
+    background: var(--enamel-dark);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-left: none;
+    border-top: none;
+    border-radius: 0 0 12px 0;
+    padding: 8px 8px 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .tape {
+    background:
+      repeating-linear-gradient(180deg, transparent 0 27px, var(--paper-line) 27px 28px),
+      linear-gradient(180deg, #F1EAD9, var(--paper));
+    background-blend-mode: multiply, normal;
+    border-radius: 3px 3px 0 0;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.35);
+    height: 100%;
+    overflow-y: auto;
+    padding: 6px 12px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    scrollbar-width: thin;
+    scrollbar-color: var(--paper-line) transparent;
+    /* torn bottom edge */
+    -webkit-mask:
+      linear-gradient(#000 0 0) top/100% calc(100% - 7px) no-repeat,
+      radial-gradient(6px 7px at 6px -1px, transparent 6px, #000 6.5px) bottom left/12px 7px repeat-x;
+            mask:
+      linear-gradient(#000 0 0) top/100% calc(100% - 7px) no-repeat,
+      radial-gradient(6px 7px at 6px -1px, transparent 6px, #000 6.5px) bottom left/12px 7px repeat-x;
+  }
+  .tape::-webkit-scrollbar { width: 6px; }
+  .tape::-webkit-scrollbar-thumb { background: var(--paper-line); border-radius: 3px; }
+
+  .line {
+    font-family: "Martian Mono", monospace;
+    font-size: 12.5px;
+    line-height: 28px;
+    color: var(--ink);
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: 10px;
+    white-space: nowrap;
+    animation: print .22s ease-out;
+  }
+  .line .num { font-variant-numeric: tabular-nums; }
+  .line .sign { width: 12px; text-align: center; color: #7A6E56; flex: none; }
+  .line.neg .num, .line.neg .sign { color: var(--red); }
+  .line.total {
+    border-top: 2px solid var(--ink);
+    margin-top: 2px;
+    font-weight: 700;
+  }
+  .line.total.neg { border-top-color: var(--red); }
+  .line.note {
+    justify-content: center;
+    color: #8A7C61;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+  }
+  .line.err { color: var(--red); justify-content: center; letter-spacing: 0.08em; }
+
+  @keyframes print {
+    from { opacity: 0; transform: translateY(-16px); clip-path: inset(0 0 100% 0); }
+    to   { opacity: 1; transform: translateY(0);     clip-path: inset(0 0 0 0); }
+  }
+
+  .tape-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .tear {
+    flex: 1;
+    font-family: "Martian Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: #C9D6CE;
+    background: transparent;
+    border: 1px solid rgba(201,214,206,0.28);
+    border-radius: 7px;
+    padding: 9px 0;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease, color .15s ease;
+  }
+  .tear:hover { background: rgba(201,214,206,0.1); border-color: rgba(201,214,206,0.5); }
+  .tear:focus-visible { outline: 2.5px solid var(--brass-lite); outline-offset: 2px; }
+
+  /* legend below */
+  .legend {
+    font-family: "Martian Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+    color: #6E827A;
+    text-align: center;
+    line-height: 1.9;
+  }
+  .legend b { color: var(--brass-lite); font-weight: 500; }
+  .legend .r { color: #C86A5C; }
+
+  /* ---- responsive -------------------------------------------------------- */
+  @media (max-width: 620px) {
+    .machine { grid-template-columns: 1fr; }
+    .body { border-radius: 22px 22px 0 0; }
+    .tape-unit { margin-left: 0; margin-top: -6px; }
+    .roller { border-radius: 0; border-left: 1px solid rgba(255,255,255,0.06); }
+    .roller::after { left: 30%; right: 30%; }
+    .tape-window { border-radius: 0 0 18px 18px; border-left: 1px solid rgba(255,255,255,0.05); min-height: 220px; }
+    .tape { justify-content: flex-start; }
+  }
+
+  /* ---- π easter egg: every key goes round ------------------------------- */
+  body.round .key {
+    border-radius: 50%;
+    aspect-ratio: 1;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  body.round .key.zero    { aspect-ratio: auto; border-radius: 40px; }
+  body.round .key.equals  { aspect-ratio: auto; border-radius: 46px; }
+  body.round .readout .value { color: var(--brass); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .line { animation: none; }
+    .key, .tear { transition: none; }
+    .tape { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="kicker">Adding Machine · No.707</div>
+    <h1>가산기 707</h1>
+    <p>누를 때마다 종이 테이프에 한 줄씩 찍힙니다. 계산이 사라지지 않고 기록으로 남아요.</p>
+  </header>
+
+  <main class="machine" aria-label="종이 테이프 계산기">
+    <section class="body">
+      <div class="plate">
+        <div class="wordmark">707</div>
+        <div class="vents" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      </div>
+
+      <div class="readout" id="readout" role="status" aria-live="polite" aria-label="현재 값">
+        <div class="op-hint" id="opHint"></div>
+        <div class="value" id="value">0</div>
+      </div>
+
+      <div class="keys" id="keys">
+        <button class="key util" data-k="clear">C</button>
+        <button class="key util" data-k="sign">±</button>
+        <button class="key util" data-k="percent">%</button>
+        <button class="key op" data-k="/">÷</button>
+
+        <button class="key" data-k="7">7</button>
+        <button class="key" data-k="8">8</button>
+        <button class="key" data-k="9">9</button>
+        <button class="key op" data-k="*">×</button>
+
+        <button class="key" data-k="4">4</button>
+        <button class="key" data-k="5">5</button>
+        <button class="key" data-k="6">6</button>
+        <button class="key op" data-k="-">−</button>
+
+        <button class="key" data-k="1">1</button>
+        <button class="key" data-k="2">2</button>
+        <button class="key" data-k="3">3</button>
+        <button class="key op" data-k="+">+</button>
+
+        <button class="key zero" data-k="0">0</button>
+        <button class="key" data-k=".">.</button>
+        <button class="key equals" data-k="=">✳</button>
+      </div>
+    </section>
+
+    <aside class="tape-unit">
+      <div class="roller" aria-hidden="true"></div>
+      <div class="tape-window">
+        <div class="tape" id="tape" role="log" aria-label="계산 테이프" aria-live="polite">
+          <div class="line note">─ 테이프 시작 ─</div>
+        </div>
+      </div>
+      <div class="tape-actions">
+        <button class="tear" id="tear">테이프 뜯기</button>
+      </div>
+    </aside>
+  </main>
+
+  <p class="legend">
+    검정 = 더한 값 &nbsp;·&nbsp; <span class="r">빨강 = 뺀 값·합계</span> &nbsp;·&nbsp; <b>✳</b> 합계 &nbsp;·&nbsp; 키보드 그대로 입력
+  </p>
+
+<script>
+(function () {
+  "use strict";
+
+  var valueEl  = document.getElementById("value");
+  var hintEl   = document.getElementById("opHint");
+  var readout  = document.getElementById("readout");
+  var tape     = document.getElementById("tape");
+  var keys     = document.getElementById("keys");
+
+  var OP_GLYPH = { "+": "+", "-": "−", "*": "×", "/": "÷" };
+
+  var state = {
+    acc: null,        // running register
+    current: "0",     // entry being typed
+    op: null,         // pending operator
+    fresh: true,      // next digit starts a new entry
+    error: false
+  };
+
+  // ---- number formatting -------------------------------------------------
+  function fmt(n) {
+    if (!isFinite(n)) return "—";
+    var neg = n < 0;
+    var x = Math.abs(n);
+    // trim floating noise, cap at 8 decimals
+    var s = (Math.round(x * 1e8) / 1e8).toString();
+    var parts = s.split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return (neg ? "−" : "") + parts.join(".");
+  }
+
+  function fmtEntry(str) {
+    if (str === "" || str === "-") return str || "0";
+    var neg = str.charAt(0) === "-";
+    var body = neg ? str.slice(1) : str;
+    var parts = body.split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",").replace(/^,/, "");
+    if (parts[0] === "") parts[0] = "0";
+    return (neg ? "−" : "") + parts.join(".");
+  }
+
+  // ---- readout -----------------------------------------------------------
+  function render() {
+    readout.classList.toggle("error", state.error);
+    valueEl.textContent = state.error ? state.current : fmtEntry(state.current);
+    hintEl.textContent = state.op && !state.error ? OP_GLYPH[state.op] : "";
+  }
+
+  // ---- tape --------------------------------------------------------------
+  function printLine(value, glyph, opts) {
+    opts = opts || {};
+    var line = document.createElement("div");
+    line.className = "line";
+    if (value < 0) line.classList.add("neg");
+    if (opts.total) line.classList.add("total");
+    if (opts.subtract && value >= 0) line.classList.add("neg"); // subtracted entries print red
+
+    var num = document.createElement("span");
+    num.className = "num";
+    num.textContent = fmt(value);
+
+    var sign = document.createElement("span");
+    sign.className = "sign";
+    sign.textContent = glyph;
+
+    line.appendChild(num);
+    line.appendChild(sign);
+    tape.appendChild(line);
+    tape.scrollTop = tape.scrollHeight;
+  }
+
+  function printNote(text, cls) {
+    var line = document.createElement("div");
+    line.className = "line " + (cls || "note");
+    line.textContent = text;
+    tape.appendChild(line);
+    tape.scrollTop = tape.scrollHeight;
+  }
+
+  // ---- arithmetic --------------------------------------------------------
+  function compute(a, b, op) {
+    switch (op) {
+      case "+": return a + b;
+      case "-": return a - b;
+      case "*": return a * b;
+      case "/": return b === 0 ? NaN : a / b;
+    }
+    return b;
+  }
+
+  // ---- input handlers ----------------------------------------------------
+  function inputDigit(d) {
+    if (state.error) clearAll();
+    if (state.fresh) { state.current = (d === ".") ? "0." : d; state.fresh = false; }
+    else if (d === ".") { if (state.current.indexOf(".") === -1) state.current += "."; }
+    else if (state.current === "0") { state.current = d; }
+    else { state.current += d; }
+    render();
+  }
+
+  function chooseOp(nextOp) {
+    if (state.error) return;
+    var entry = parseFloat(state.current);
+
+    // commit current entry with the pending op (or seed the register)
+    if (state.op == null) {
+      state.acc = entry;
+      printLine(entry, OP_GLYPH[nextOp], { subtract: nextOp === "-" && false });
+    } else if (!state.fresh) {
+      var glyph = OP_GLYPH[state.op];
+      printLine(entry, glyph, { subtract: state.op === "-" });
+      state.acc = compute(state.acc, entry, state.op);
+      if (!isFinite(state.acc)) return divideError();
+    }
+    state.op = nextOp;
+    state.fresh = true;
+    state.current = String(state.acc);
+    render();
+  }
+
+  function equals() {
+    if (state.error || state.op == null) return;
+    var entry = parseFloat(state.current);
+    if (!state.fresh) {
+      printLine(entry, OP_GLYPH[state.op], { subtract: state.op === "-" });
+      state.acc = compute(state.acc, entry, state.op);
+      if (!isFinite(state.acc)) return divideError();
+    }
+    printLine(state.acc, "✳", { total: true });
+    state.current = String(state.acc);
+    state.op = null;
+    state.fresh = true;
+    render();
+  }
+
+  function percent() {
+    if (state.error) return;
+    var entry = parseFloat(state.current);
+    // percent of the running register when mid-operation, else of itself
+    var base = (state.op != null && state.acc != null) ? state.acc : entry;
+    state.current = String(base * entry / 100);
+    state.fresh = false;
+    render();
+  }
+
+  function toggleSign() {
+    if (state.error) return;
+    if (state.current === "0") return;
+    state.current = state.current.charAt(0) === "-"
+      ? state.current.slice(1)
+      : "-" + state.current;
+    render();
+  }
+
+  function divideError() {
+    state.error = true;
+    state.current = "0으로 못 나눔";
+    printNote("─ 0으로 나눌 수 없음 ─", "err");
+    state.op = null;
+    state.fresh = true;
+    render();
+  }
+
+  function piEgg() {
+    document.body.classList.add("round");
+    printNote("─ 원주율 π ─", "note");
+    printLine(Math.PI, "π", { total: true });
+    state = { acc: null, current: String(Math.PI), op: null, fresh: true, error: false };
+    render();
+  }
+
+  function clearAll() {
+    var wasClear = state.acc == null && state.current === "0" && state.op == null && !state.error;
+    var wasRound = document.body.classList.contains("round");
+    document.body.classList.remove("round");
+    state = { acc: null, current: "0", op: null, fresh: true, error: false };
+    render();
+    if (!wasClear || wasRound) printNote("─ 지움 ─", "note");
+  }
+
+  function tearOff() {
+    tape.innerHTML = "";
+    printNote("─ 테이프 시작 ─", "note");
+    clearAll();
+  }
+
+  // ---- dispatch ----------------------------------------------------------
+  function handle(k) {
+    if (/^[0-9.]$/.test(k)) inputDigit(k);
+    else if (k === "+" || k === "-" || k === "*" || k === "/") chooseOp(k);
+    else if (k === "=") {
+      if (state.op == null && !state.fresh && state.current === "3.14") piEgg();
+      else equals();
+    }
+    else if (k === "percent") percent();
+    else if (k === "sign") toggleSign();
+    else if (k === "clear") clearAll();
+  }
+
+  function flash(k) {
+    var btn = keys.querySelector('[data-k="' + (k === "percent" ? "percent" : k === "sign" ? "sign" : k) + '"]');
+    if (!btn) return;
+    btn.classList.add("press");
+    setTimeout(function () { btn.classList.remove("press"); }, 90);
+  }
+
+  keys.addEventListener("click", function (e) {
+    var btn = e.target.closest(".key");
+    if (!btn) return;
+    handle(btn.getAttribute("data-k"));
+  });
+
+  document.getElementById("tear").addEventListener("click", tearOff);
+
+  document.addEventListener("keydown", function (e) {
+    var k = e.key;
+    var mapped = null;
+    if (/^[0-9]$/.test(k) || k === ".") mapped = k;
+    else if (k === "+" || k === "-" || k === "*" || k === "/") mapped = k;
+    else if (k === "Enter" || k === "=") mapped = "=";
+    else if (k === "%") mapped = "percent";
+    else if (k === "Escape") mapped = "clear";
+    else if (k === "Backspace") { backspace(); return; }
+    if (mapped == null) return;
+    e.preventDefault();
+    handle(mapped);
+    flash(mapped);
+  });
+
+  function backspace() {
+    if (state.error) { clearAll(); return; }
+    if (state.fresh) return;
+    var s = state.current;
+    s = s.length <= 1 || (s.length === 2 && s.charAt(0) === "-") ? "0" : s.slice(0, -1);
+    if (s === "-") s = "0";
+    state.current = s;
+    if (s === "0") state.fresh = true;
+    render();
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>
