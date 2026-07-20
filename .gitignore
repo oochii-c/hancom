@@ -7,3 +7,13 @@ node_modules/
 # 환경변수 무시
 .env
 
+# YOLO 모델 가중치 무시
+*.pt
+
+# YOLO 추론 결과 무시
+runs/
+
+# 캡처/생성 이미지 무시
+12_data/captured_images/
+result_det.jpg
+
