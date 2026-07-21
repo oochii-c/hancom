@@ -17,3 +17,11 @@ runs/
 12_data/captured_images/
 result_det.jpg
 
+# 데이터셋·대용량 파일 무시
+images.zip
+images/
+roots.sst
+sahi/
+13_yolo/advanced/input_fast_sam.png
+13_yolo/advanced/demo_data/
+

@@ -25,6 +25,7 @@ while cap.isOpened():
 
     # 3-3. 결과 화면
     cv2.imshow("YOLO_TRACKING", annotated_frame)
+    cv2.namedWindow("YOLO_TRACKING", cv2.WINDOW_NORMAL)
 
     # 3-4. q키를 눌러 종료
     if cv2.waitKey(1) & 0xFF ==ord('q'):
